@@ -23,15 +23,19 @@ $ git clone git@github.com/SniperSlayerss/dotfiles.git
 $ cd dotfiles
 ```
 
-then use GNU stow to create symlinks
+then use GNU stow to create symlinks,
+first for the common files
 
 ```
 $ stow common
 ```
 
-use eiter `pc` or `laptop` depending on the system
+then for the platform specific files
 
 ```
 $ stow pc
+```
+or
+```
 $ stow laptop
 ```
