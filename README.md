@@ -26,5 +26,12 @@ $ cd dotfiles
 then use GNU stow to create symlinks
 
 ```
-$ stow .
+$ stow common
+```
+
+use eiter `pc` or `laptop` depending on the system
+
+```
+$ stow pc
+$ stow laptop
 ```
