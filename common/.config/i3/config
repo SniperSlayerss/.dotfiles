@@ -206,18 +206,18 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotoo
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
 
 # Switch to normal font size
-bindsym $mod+F2 exec --no-startup-id ~/Scripts/switch_to_normal.sh
+#bindsym $mod+F2 exec --no-startup-id ~/Scripts/switch_to_normal.sh
 
 # Switch to large font size
-bindsym $mod+F3 exec --no-startup-id ~/Scripts/switch_to_larger.sh
+#bindsym $mod+F3 exec --no-startup-id ~/Scripts/switch_to_larger.sh
 
 # Dispaly settigns
 exec_always --no-startup-id ~/.config/i3/autostart.sh
 
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+#exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
-exec_always --no-startup-id ~/Scripts/touchpad_settings.sh
+#exec_always --no-startup-id ~/Scripts/touchpad_settings.sh
 
-exec --no-startup-id xmodmap ~/.Xmodmap
+#exec --no-startup-id xmodmap ~/.Xmodmap
 
 exec_always nitrogen --restore

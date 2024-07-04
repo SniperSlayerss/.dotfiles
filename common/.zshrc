@@ -5,18 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 export FZF_BASE="~/.fzh"
-
-# Wayland environment variables
-export CLUTTER_BACKEND=wayland
-export SDL_VIDEODRIVER=wayland
-export XDG_SESSION_TYPE=wayland
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export MOZ_ENABLE_WAYLAND=1
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export WLR_NO_HARDWARE_CURSORS=1
-
+export VK_DRIVER_FILES="/usr/share/vulkan/icd.d/nvidia_icd.json"
 ZSH_THEME="robbyrussell"
 
 plugins=(git fzf)
