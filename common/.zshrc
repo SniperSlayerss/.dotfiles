@@ -25,5 +25,3 @@ zle -N fzf_open
 bindkey '^f' fzf_open
 
 [ -f "/home/jack/.ghcup/env" ] && . "/home/jack/.ghcup/env" # ghcup-env
-eval "$(zoxide init zsh)"
-alias cd="z"
