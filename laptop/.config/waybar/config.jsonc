@@ -5,7 +5,6 @@
 	"modules-left": [
 		"hyprland/mode",
 		"hyprland/workspaces",
-		"custom/arrow10",
 		"hyprland/window"
 	],
 
@@ -50,8 +49,8 @@
 				"󱩕",
 				"󱩖",
 				"󰛨"],
-	"on-scroll-down":	"brightnessctl set 1%- && $HOME/.scripts/progressbar.sh --brightness",
-	"on-scroll-up":		"brightnessctl set +1% && $HOME/.scripts/progressbar.sh --brightness",
+	"on-scroll-down": "current_brightness=$(brightnessctl get); min_brightness=20; if [ $current_brightness -gt $min_brightness ]; then brightnessctl set 1%-; fi",
+	"on-scroll-up":	  "brightnessctl set +1%",
 	"tooltip": 		false,
 },
 	"clock#time": {
@@ -94,7 +93,7 @@
 		"format-wifi": " ({signalStrength}%)",
 		"format-ethernet": " {ifname}",
 		"format-disconnected": "No connection",
-		"format-alt": " {ipaddr}/{cidr}",
+		"format-alt": "{ipaddr}/{cidr}",
 		"tooltip": false
 	},
 
@@ -103,13 +102,13 @@
 		"tooltip": false
 	},
 
-	"sway/window": {
+	"hyprland/window": {
 		"format": "{}",
 		"max-length": 30,
 		"tooltip": false
 	},
 
-	"sway/workspaces": {
+	"hyrpland/workspaces": {
 		"disable-scroll-wraparound": true,
 		"smooth-scrolling-threshold": 4,
 		"enable-bar-scroll": true,
@@ -117,7 +116,7 @@
 	},
 
 	"pulseaudio": {
-		"format": "{icon} {volume}%",
+		"format": "{icon}  {volume}%",
 		"format-bluetooth": "{icon} {volume}%",
 		"format-muted": "",
 		"format-icons": {
