@@ -12,13 +12,21 @@ alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --o
 # Source fzf if it exists
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FZF_CTRL_R_OPTS="--height 10"
+export FZF_ALT_C_OPTS='--no-height --no-reverse'
+
 fzf_open() {
   local file
   file=$(find . -type f | sed 's|^\./||' | fzf --multi)
   [ -n "$file" ] && nvim $file
 }
 
-zle -N fzf_open
-bindkey '^f' fzf_open
+fzf_dir() {
+  zle fzf-cd-widget
+  clear
+}
 
-[ -f "/home/jack/.ghcup/env" ] && . "/home/jack/.ghcup/env" # ghcup-env
+zle -N fzf_open
+zle -N fzf_dir
+bindkey '^x' fzf_open
+bindkey '^f' fzf_dir 
