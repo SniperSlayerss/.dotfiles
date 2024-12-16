@@ -1,6 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 export FZF_BASE="~/.fzh"
+export PATH="$HOME/.local/bin:$PATH"
 ZSH_THEME="robbyrussell"
 
 plugins=(git fzf)
@@ -30,3 +31,5 @@ zle -N fzf_open
 zle -N fzf_dir
 bindkey '^x' fzf_open
 bindkey '^f' fzf_dir 
+
+eval $(opam env)
