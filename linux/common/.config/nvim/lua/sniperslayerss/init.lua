@@ -8,6 +8,8 @@ local SniperSlayerssGroup = augroup('SniperSlayerss', {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
 
+vim.opt.clipboard = "unnamedplus"
+
 function R(name)
     require("plenary.reload").reload_module(name)
 end

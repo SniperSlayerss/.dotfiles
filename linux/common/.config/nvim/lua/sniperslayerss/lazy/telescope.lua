@@ -6,9 +6,18 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim"
     },
-
     config = function()
-        require('telescope').setup({})
+        local actions = require("telescope.actions")
+
+        require('telescope').setup({
+            defaults = {
+                mappings = {
+                    n = {
+                        ["<C-c>"] = actions.close,
+                    },
+                },
+            },
+        })
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
@@ -27,4 +36,3 @@ return {
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     end
 }
-
