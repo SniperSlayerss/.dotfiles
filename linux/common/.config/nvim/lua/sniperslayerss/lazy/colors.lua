@@ -10,7 +10,7 @@ end
 return {
     {
         "folke/tokyonight.nvim",
-        name="tokyonight",
+        name = "tokyonight",
         config = function()
             require("tokyonight").setup({
                 -- your configuration comes here
