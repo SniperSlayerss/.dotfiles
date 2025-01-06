@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
-export FZF_BASE="~/.fzh"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/nvim-linux64/bin:$PATH"
 ZSH_THEME="robbyrussell"
 
 plugins=(git fzf)
@@ -27,9 +27,18 @@ fzf_dir() {
   clear
 }
 
+tms_open() {
+  zle -I
+  BUFFER="tms"
+  zle accept-line
+}
+
+
 zle -N fzf_open
 zle -N fzf_dir
+zle -N tms_open
 bindkey '^x' fzf_open
-bindkey '^f' fzf_dir 
+bindkey '^f' fzf_dir
+bindkey '^]t' tms_open
 
 eval $(opam env)

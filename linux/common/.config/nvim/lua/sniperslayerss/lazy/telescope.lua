@@ -9,19 +9,28 @@ return {
     config = function()
         local actions = require("telescope.actions")
 
-        require('telescope').setup({
+        local telescope = require('telescope')
+
+        telescope.setup({
             defaults = {
                 mappings = {
                     n = {
                         ["<C-c>"] = actions.close,
                     },
                 },
+                previewer = false,
+            },
+            pickers = {
+                find_files = {
+                    theme = "ivy",
+                    previewer = false,
+                },
             },
         })
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        vim.keymap.set('n', '<leader>ff', builtin.git_files, {})
         vim.keymap.set('n', '<leader>pws', function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
