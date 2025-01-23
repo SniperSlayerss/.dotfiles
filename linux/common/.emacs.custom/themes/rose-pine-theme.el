@@ -63,7 +63,7 @@
    ;; highlight current line
    `(hl-line ((t (:background ,overlay :foreground nil))))
 
-    ;; line-numbers
+   ;; line-numbers
    `(line-number ((t (:inherit default :foreground ,subtle :background ,base))))
    `(line-number-current-line ((t (:inherit line-number :foreground ,text :background ,base))))
 
@@ -75,6 +75,15 @@
    `(mode-line-emphasis ((t (:background  ,base :foreground ,text))))
    `(mode-line-highlight ((t (:background ,base :foreground ,text :box nil))))
 
+   ;; Ido
+   `(ido-first-match ((t (:foreground ,rose :bold nil))))
+   `(ido-only-match ((t (:foreground ,gold :weight bold))))
+   `(ido-subdir ((t (:foreground ,foam :weight bold))))
+
+   ;; Dired
+   `(dired-directory ((t (:foreground ,foam :weight bold))))
+   `(dired-ignored ((t (list :foreground ,rose
+                              :inherit 'unspecified))))
    ))
 
 ;; Add to custom-theme-load-path
