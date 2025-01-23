@@ -36,7 +36,7 @@ link:
 .PHONY: clean
 clean:
 	@echo "Removing existing files or directories..."
-	@$(foreach dotfile, $(DOTFILES), \
+	@$(foreach dotfile, $(DOTFILES_SHARED), \
 	    dest=$(word 2,$(subst :, ,$(dotfile))); \
 	    if [ -e $$(eval echo $$dest) ] || [ -L $$(eval echo $$dest) ]; then \
 	        echo "Removing $$dest"; \
