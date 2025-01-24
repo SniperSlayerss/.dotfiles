@@ -14,7 +14,8 @@ DOTFILES_SHARED := \
     .config/rofi:~/.config/rofi \
     .config/tms:~/.config/tms \
     .config/tofi:~/.config/tofi \
-    .config/ghostty:~/.config/ghostty
+    .config/ghostty:~/.config/ghostty \
+    .config/waybar:~/.config/waybar
 
 
 # Default target: Install all dotfiles
