@@ -8,6 +8,7 @@
 
 (require-package 'evil)
 (evil-mode 1)
+;; Prevent Evil pasting from overwriting the clipboard
 (setq-default evil-kill-on-visual-paste nil)
 
 (require-package 'which-key)
@@ -18,10 +19,18 @@
 (setq corfu-auto t
       corfu-quit-no-match 'separator)
 
-(require-package 'projectile
-		 'ivy
-		 'counsel
-		 'smex)
+(require-package  'projectile
+		  'ivy
+		  'counsel
+		  'smex)
+
+;; Hooks
+(defun auto-indent-on-save ()
+  "Auto-indent the entire buffer before saving."
+  (when (derived-mode-p 'prog-mode)
+    (indent-region (point-min) (point-max))))
+
+(add-hook 'before-save-hook 'auto-indent-on-save)
 
 ;; Keybinds
 (evil-set-leader 'normal (kbd "SPC"))
@@ -37,15 +46,23 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Counsel
-(evil-define-key 'normal 'global (kbd "<leader>if") 'counsel-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>fz") 'counsel-fzf)
+(evil-define-key 'normal 'global (kbd "<leader>im") 'counsel-M-x)
+(evil-define-key 'normal 'global (kbd "<leader>ig") 'counsel-grep)
+(evil-define-key 'normal 'global (kbd "<leader>fb") 'counsel-ibuffer)
+(evil-define-key 'normal 'global (kbd "<leader>id") 'counsel-dired)
 (evil-define-key 'normal 'global (kbd "<leader>ik") 'counsel-describe-function)
 (evil-define-key 'normal 'global (kbd "<leader>iv") 'counsel-describe-variable)
 (evil-define-key 'normal 'global (kbd "<leader>is") 'counsel-describe-symbol)
 
 ;; Projectile
-;;(evil-define-key 'normal 'global (kbd "<leader>pf") 'projectile-)
-  
-;; Corfu 
+(evil-define-key 'normal 'global (kbd "<leader>pf") 'projectile-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>pg") 'projectile-grep)
+(evil-define-key 'normal 'global (kbd "<leader>pd") 'projectile-dired)
+(evil-define-key 'normal 'global (kbd "<leader>pc") 'projectile-compile-project)
+(evil-define-key 'normal 'global (kbd "<leader>ps") 'projectile-find-other-file)
+
+;; Corfu
 (evil-define-key 'normal 'global (kbd "<leader>cd") 'corfu-mode)
 (define-key corfu-map (kbd "RET") nil)
 
