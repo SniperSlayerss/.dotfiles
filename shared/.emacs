@@ -71,6 +71,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("3670e6655d5a33e20e5b93315e46962def6ded0920e1adb156a296ab9ac59349" default))
  '(package-selected-packages
    '(company counsel evil ido-completing-read+ ivy projectile smex)))
 (custom-set-faces
