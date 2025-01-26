@@ -43,7 +43,20 @@
    `(font-lock-warning-face ((t (:foreground ,gold))))
    `(font-lock-negation-char-face ((t (:foreground ,subtle))))
 
-
+   ;; tree-sitter faces
+   `(tree-sitter-face:keyword ((t (:foreground ,pine))))
+   `(tree-sitter-face:function ((t (:foreground ,rose))))
+   `(tree-sitter-face:type ((t (:foreground ,foam))))
+   `(tree-sitter-face:variable ((t (:foreground ,text))))
+   `(tree-sitter-face:string ((t (:foreground ,gold))))
+   `(tree-sitter-face:number ((t (:foreground ,gold))))
+   `(tree-sitter-face:comment ((t (:foreground ,subtle))))
+   `(tree-sitter-face:docstring ((t (:foreground ,gold))))
+   `(tree-sitter-face:constant ((t (:foreground ,pine))))
+   `(tree-sitter-face:operator ((t (:foreground ,subtle))))
+   `(tree-sitter-face:punctuation ((t (:foreground ,subtle))))
+   `(tree-sitter-face:label ((t (:foreground ,rose))))
+   `(tree-sitter-face:namespace ((t (:foreground ,foam))))
 
    ;; general
    `(cursor ((t (:foreground ,base :background ,subtle))))
