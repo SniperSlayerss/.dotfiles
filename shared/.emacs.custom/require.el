@@ -11,10 +11,10 @@
   (package-refresh-contents))
 
 (defun require-one-package (package)
-    (unless (package-installed-p 'package)
+    (unless (package-installed-p package)
     (package-refresh-contents)
-    (package-install 'package))
-    (require 'package))
+    (package-install package))
+    (require package))
 
 (defun require-package (&rest packages)
   (dolist (package packages)
