@@ -34,7 +34,7 @@
    `(font-lock-comment-delimiter-face ((t (:foreground ,subtle))))
    `(font-lock-constant-face ((t (:foreground ,pine))))
    `(font-lock-doc-face ((t (:foreground ,gold))))
-   `(font-lock-function-name-face ((t (:foreground ,rose))))
+   `(font-lock-function-name-face ((t (:foreground ,text))))
    `(font-lock-keyword-face ((t (:foreground ,pine))))
    `(font-lock-preprocessor-face ((t (:foreground ,pine))))
    `(font-lock-string-face ((t (:foreground ,gold))))
@@ -44,19 +44,18 @@
    `(font-lock-negation-char-face ((t (:foreground ,subtle))))
 
    ;; tree-sitter faces
-   `(tree-sitter-face:keyword ((t (:foreground ,pine))))
-   `(tree-sitter-face:function ((t (:foreground ,rose))))
-   `(tree-sitter-face:type ((t (:foreground ,foam))))
-   `(tree-sitter-face:variable ((t (:foreground ,text))))
-   `(tree-sitter-face:string ((t (:foreground ,gold))))
-   `(tree-sitter-face:number ((t (:foreground ,gold))))
-   `(tree-sitter-face:comment ((t (:foreground ,subtle))))
-   `(tree-sitter-face:docstring ((t (:foreground ,gold))))
-   `(tree-sitter-face:constant ((t (:foreground ,pine))))
-   `(tree-sitter-face:operator ((t (:foreground ,subtle))))
-   `(tree-sitter-face:punctuation ((t (:foreground ,subtle))))
-   `(tree-sitter-face:label ((t (:foreground ,rose))))
-   `(tree-sitter-face:namespace ((t (:foreground ,foam))))
+   `(tree-sitter-hl-face:function.call ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:punctuation ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:punctuation.delimiter ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:operator ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:type.builtin ((t (:foreground ,foam))))
+   `(tree-sitter-hl-face:constant ((t (:foreground ,gold))))
+   `(tree-sitter-hl-face:property ((t (:foreground ,text))))
+
+   ;; lsp
+   `(lsp-face-highlight-textual ((t (:background ,highlight_med))))
+   `(lsp-face-highlight-write ((t (:background ,highlight_med :foreground ,iris))))
+   `(lsp-face-highlight-read ((t (:background ,highlight_med :foreground ,foam))))
 
    ;; general
    `(cursor ((t (:foreground ,base :background ,subtle))))
@@ -69,12 +68,15 @@
    `(show-paren-match ((t (:foreground ,pine :italic t :underline t))))
    `(show-paren-mismatch ((t (:foreground ,iris :underline t))))
 
+   ;; xref
+   `(xref-file-header ((t (:foreground ,rose :underline t))))
+   `(xref-match ((t (:foreground ,love :weight bold))))
 
-   ;; highlight-numbers
-   `(highlight-numbers-number ((t (:foreground ,gold))))
-
-   ;; highlight current line
+   ;; highlight
    `(hl-line ((t (:background ,overlay :foreground nil))))
+   `(highlight-numbers-number ((t (:foreground ,gold))))
+   `(isearch ((t (:background ,highlight_high))))
+   `(lazy-highlight ((t (:background ,highlight_med))))
 
    ;; line-numbers
    `(line-number ((t (:inherit default :foreground ,subtle :background ,base))))
@@ -88,15 +90,16 @@
    `(mode-line-emphasis ((t (:background  ,base :foreground ,text))))
    `(mode-line-highlight ((t (:background ,base :foreground ,text :box nil))))
 
-   ;; Ido
+   ;; ido
    `(ido-first-match ((t (:foreground ,rose :bold nil))))
    `(ido-only-match ((t (:foreground ,gold :weight bold))))
    `(ido-subdir ((t (:foreground ,foam :weight bold))))
 
-   ;; Dired
+   ;; dired
    `(dired-directory ((t (:foreground ,foam :weight bold))))
    `(dired-ignored ((t (list :foreground ,rose
                               :inherit 'unspecified))))
+
    ))
 
 ;; Add to custom-theme-load-path
