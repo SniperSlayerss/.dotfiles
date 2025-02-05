@@ -1,7 +1,7 @@
 theme = rose-pine
 window-decoration = false
 font-family = "FiraCode Nerd Font Mono"
-font-size = 20
+font-size = 14
 cursor-style = "block"
 shell-integration-features = no-cursor
 mouse-hide-while-typing = true

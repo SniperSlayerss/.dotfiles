@@ -49,8 +49,12 @@
    `(tree-sitter-hl-face:punctuation.delimiter ((t (:foreground ,text))))
    `(tree-sitter-hl-face:operator ((t (:foreground ,text))))
    `(tree-sitter-hl-face:type.builtin ((t (:foreground ,foam))))
+   `(tree-sitter-hl-face:function.builtin ((t (:foreground ,pine))))
    `(tree-sitter-hl-face:constant ((t (:foreground ,gold))))
    `(tree-sitter-hl-face:property ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:constructor ((t (:foreground ,text))))
+   `(tree-sitter-hl-face:number ((t (:foreground ,rose))))
+   `(tree-sitter-hl-face:label ((t (:foreground ,iris))))
 
    ;; lsp
    `(lsp-face-highlight-textual ((t (:background ,highlight_med))))
