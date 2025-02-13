@@ -6,5 +6,7 @@ return {
   config = function()
     vim.g.compile_mode = {
     }
+
+    vim.keymap.set("n", "<leader>cc", "<cmd>below Compile<CR>")
   end
 }
