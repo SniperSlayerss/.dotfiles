@@ -16,7 +16,7 @@ return {
     -- Load project.nvim before setting up telescope
     require("project_nvim").setup({
       detection_methods = { "pattern", "lsp" },
-      patterns = { ".git", "Makefile", "package.json", "pyproject.toml", ".projectile" },
+      patterns = { ".git", ".projectile" },
       manual_mode = false,
       silent_chdir = false,
       scope_chdir = "global",
@@ -55,8 +55,8 @@ return {
     telescope.load_extension("projects")
 
     local builtin = require("telescope.builtin")
-    vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-    vim.keymap.set("n", "<leader>ff", builtin.git_files, {})
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+    vim.keymap.set("n", "<leader>pf", builtin.git_files, {})
     vim.keymap.set("n", "<leader>pws", function()
       local word = vim.fn.expand("<cword>")
       builtin.grep_string({ search = word })
