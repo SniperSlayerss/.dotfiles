@@ -55,7 +55,12 @@ return {
     telescope.load_extension("projects")
 
     local builtin = require("telescope.builtin")
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+    vim.keymap.set("n", "<leader>ff", function()
+      local opts = {
+        cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
+      }
+      builtin.find_files(opts)
+    end, {})
     vim.keymap.set("n", "<leader>pf", builtin.git_files, {})
     vim.keymap.set("n", "<leader>pws", function()
       local word = vim.fn.expand("<cword>")
