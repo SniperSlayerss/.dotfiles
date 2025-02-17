@@ -55,13 +55,28 @@ return {
     telescope.load_extension("projects")
 
     local builtin = require("telescope.builtin")
+
+    -- find files local to current file (or oil dir)
     vim.keymap.set("n", "<leader>ff", function()
+      local cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
+
+      -- Remove 'oil://' prefix if present
+      if cwd:match("^oil://") then
+        cwd = cwd:gsub("^oil://", "")
+      end
+
       local opts = {
-        cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
+        cwd = cwd,
+        hidden = true,
+        no_ignore = true,
+        file_ignore_patterns = { ".git/" },
       }
       builtin.find_files(opts)
     end, {})
+
+    -- find files in project root
     vim.keymap.set("n", "<leader>pf", builtin.git_files, {})
+
     vim.keymap.set("n", "<leader>pws", function()
       local word = vim.fn.expand("<cword>")
       builtin.grep_string({ search = word })
