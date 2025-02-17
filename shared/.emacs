@@ -1,3 +1,4 @@
+(add-to-list 'load-path "~/.emacs.custom/lsp-bridge")
 (load-file "~/.emacs.custom/require.el")
 (load-file "~/.emacs.custom/style.el")
 (load-file "~/.emacs.custom/utils.el")
@@ -11,24 +12,18 @@
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-;; direnv
-(require-package 'direnv)
-(direnv-mode 1)
+;; yasnippet
+(require-package 'yasnippet)
+(yas-global-mode 1)
 
-;; eglot
-(require 'eglot)
-(add-hook 'python-mode-hook 'eglot-ensure)
-(setq eglot-stay-out-of '(flymake))
-
-;; flycheck
-(require-package 'flycheck)
-(add-hook 'eglot--managed-mode-hook 'flycheck-mode)
-(setq flycheck-check-syntax-automatically '(save mode-enable))
-(setq flycheck-display-errors-function
-      #'flycheck-display-error-messages)
-
-(require-package 'flycheck-pos-tip)
-(flycheck-pos-tip-mode)
+;; lsp-bridge
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
+(setq lsp-bridge-default-mode-hooks
+      '((python-mode . ("pyright"))))
+(setq lsp-bridge-enable-completion-in-string t)
+(setq lsp-bridge-python-command "~/.pyenv/versions/3.12.9/bin/python3.12")
+(setq lsp-bridge-python-lsp-server "pyright")
 
 ;; ido-completing-read+
 (require-package 'ido-completing-read+)
@@ -44,16 +39,6 @@
 ;; which-key
 (require-package 'which-key)
 (which-key-mode)
-
-;; corfu
-;; (require-package 'corfu)
-;; (setq
-;;   corfu-auto t
-;;   corfu-quit-no-match 'separator
-;;   corfu-auto-delay 0.05
-;;   corfu-auto-prefix 1
-;;   global-corfu-minibuffer nil)
-;; (global-corfu-mode)
 
 ;; projectile
 (require-package 'projectile)
@@ -86,6 +71,8 @@
            (abbrev-mode nil "abbrev")
            (eldoc-mode nil "eldoc")
            (tree-sitter-mode nil "tree-sitter")
+           (projectile-mode nil "projectile")
+           (eglot-mode nil "eglot")
            ))
 
 ;; keybinds
@@ -100,13 +87,6 @@
 (evil-define-key 'normal 'global (kbd "<leader>bp") 'previous-buffer)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-<backspace>") 'alt/backward-kill-word)
-
-;; lsp
-(evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
-(evil-define-key 'normal 'global (kbd "<leader>ld") 'lsp-find-definition)
-(evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-describe-session)
-(evil-define-key 'normal 'global (kbd "<leader>li") 'lsp-ui-imenu)
-(evil-define-key 'normal 'global (kbd "K") 'lsp-ui-doc-glance)
 
 ;; drag-stuff
 (evil-define-key 'visual 'global (kbd "J") 'drag-stuff-down)
@@ -144,10 +124,6 @@
 (global-set-key (kbd "C-5") 'harpoon-go-to-5)
 (global-set-key (kbd "C-l") 'harpoon-toggle-file)
 (global-set-key (kbd "C-a") 'harpoon-add-file)
-
-;; corfu
-;; (evil-define-key 'normal 'global (kbd "<leader>cd") 'corfu-mode)
-;; (define-key corfu-map (kbd "RET") nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
