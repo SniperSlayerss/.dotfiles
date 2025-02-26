@@ -32,7 +32,7 @@ return {
 
         layout_strategy = 'bottom_pane',
         layout_config = {
-          height = 0.25,
+          height = 0.4,
           preview_cutoff = 20,
           prompt_position = "bottom"
         },
