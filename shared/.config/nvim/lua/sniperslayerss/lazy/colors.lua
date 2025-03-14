@@ -7,4 +7,4 @@ local rose_pine = require("custom-rose-pine")
 local rose_pine_dawn = require("rose-pine-dawn")
 local alabaster = require("alabaster")
 
-return alabaster
+return rose_pine
