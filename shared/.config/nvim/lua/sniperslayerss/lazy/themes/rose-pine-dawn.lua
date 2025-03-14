@@ -11,7 +11,7 @@ return {
           italic = false,
         },
         groups = {
-          background = '#ffffff'
+          background = '#F7F7F7'
         },
       })
 
