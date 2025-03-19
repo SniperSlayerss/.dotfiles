@@ -6,5 +6,6 @@ package.path = package.path .. ";" .. scriptDir .. "themes/?.lua"
 local rose_pine = require("custom-rose-pine")
 local rose_pine_dawn = require("rose-pine-dawn")
 local alabaster = require("alabaster")
+local gruber_darker = require("gruber-darker-theme")
 
 return rose_pine
