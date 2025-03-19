@@ -75,7 +75,13 @@ return {
     end, {})
 
     -- find files in project root
-    vim.keymap.set("n", "<leader>pf", builtin.git_files, {})
+    vim.keymap.set("n", "<leader>pf", function()
+      builtin.find_files({
+        hidden = true,
+        no_ignore = true,
+        file_ignore_patterns = { ".git/" },
+      })
+    end, {})
 
     vim.keymap.set("n", "<leader>pws", function()
       local word = vim.fn.expand("<cword>")
@@ -96,7 +102,6 @@ return {
         attach_mappings = function(_, map)
           map("i", "<CR>", function(prompt_bufnr)
             local action_state = require("telescope.actions.state")
-            local actions = require("telescope.actions")
             local selected_entry = action_state.get_selected_entry()
             local project_path = selected_entry.value
 
@@ -104,7 +109,7 @@ return {
             vim.cmd("cd " .. project_path)
 
             -- Open find_files including hidden & ignored files
-            require("telescope.builtin").find_files({
+            builtin.find_files({
               cwd = project_path,
               hidden = true,
               no_ignore = true,
