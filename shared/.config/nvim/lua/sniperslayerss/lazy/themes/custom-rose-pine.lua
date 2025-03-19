@@ -1,19 +1,21 @@
 local palette = {
-  _nc = "#16141f",
-  base = "#191724",
-  surface = "#1f1d2e",
-  overlay = "#26233a",
-  muted = "#6e6a86", subtle = "#908caa", text = "#e0def4",
+  _nc = "#1f1d30",
+  base = "#232136",
+  surface = "#2a273f",
+  overlay = "#393552",
+  muted = "#6e6a86",
+  subtle = "#908caa",
+  text = "#e0def4",
   love = "#eb6f92",
   gold = "#f6c177",
-  rose = "#ebbcba",
-  pine = "#31748f",
+  rose = "#ea9a97",
+  pine = "#3e8fb0",
   foam = "#9ccfd8",
   iris = "#c4a7e7",
   leaf = "#95b1ac",
-  highlight_low = "#21202e",
-  highlight_med = "#403d52",
-  highlight_high = "#524f67",
+  highlight_low = "#2a283e",
+  highlight_med = "#44415a",
+  highlight_high = "#56526e",
   none = "NONE",
 }
 
@@ -321,7 +323,7 @@ return {
           ["@constant.builtin"] = { fg = palette.pine, bold = styles.bold },
           ["@constant.macro"] = { fg = palette.text },
 
-          ["@module"] = { fg = palette.pine},
+          ["@module"] = { fg = palette.pine },
           ["@module.builtin"] = { fg = palette.text, bold = styles.bold },
           ["@label"] = { link = "Label" },
 
@@ -358,7 +360,7 @@ return {
           ["@function.method"] = { fg = palette.rose },
           ["@function.method.call"] = { fg = palette.rose },
 
-          ["@constructor"] = { fg = palette.foam},
+          ["@constructor"] = { fg = palette.foam },
           ["@operator"] = { link = "Operator" },
 
           ["@keyword"] = { link = "Keyword" },
