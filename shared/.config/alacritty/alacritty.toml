@@ -1,12 +1,12 @@
-import = ["~/.config/alacritty/rose-pine-moon.toml", "~/.config/alacritty/monitors.toml"]
+general.import = ["~/.config/alacritty/rose-pine.toml", "~/.config/alacritty/monitors.toml"]
 
 [window]
   opacity = 1
 
 [font]
-  normal = { family = "JetBrainsMono", style = "Regular" }
-  bold = { family = "JetBrainsMono", style = "Regular" }
-  italic = { family = "JetBrainsMono", style = "Italic" }
+  normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+  bold = { family = "FiraCode Nerd Font Mono", style = "Bold" }
+  italic = { family = "FiraCode Nerd Font Mono", style = "Italic" }
 
 
 [env]
