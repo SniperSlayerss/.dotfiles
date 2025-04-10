@@ -5,8 +5,44 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+local function c_d()
+  vim.opt.lazyredraw = true
+  local cd_key = vim.api.nvim_replace_termcodes("<C-d>", true, false, true)
+  vim.api.nvim_feedkeys(cd_key, "n", true)
+  vim.cmd("normal! zz")
+  vim.opt.lazyredraw = false
+  vim.cmd("redraw")
+end
+vim.keymap.set("n", "<C-d>", c_d)
+
+
+local function c_u()
+  vim.opt.lazyredraw = true
+  local cu_key = vim.api.nvim_replace_termcodes("<C-u>", true, false, true)
+  vim.api.nvim_feedkeys(cu_key, "n", true)
+  vim.cmd("normal! zz")
+  vim.opt.lazyredraw = false
+  vim.cmd("redraw")
+end
+vim.keymap.set("n", "<C-u>", c_u)
+
+
+local function Hzz()
+  vim.opt.lazyredraw = true
+  vim.cmd("normal! Hzz")
+  vim.opt.lazyredraw = false
+end
+vim.keymap.set("n", "H", Hzz)
+
+local function Lzz()
+  vim.opt.lazyredraw = true
+  vim.cmd("normal! Lzz")
+  vim.opt.lazyredraw = false
+  vim.cmd("redraw")
+end
+vim.keymap.set("n", "L", Lzz)
+
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
