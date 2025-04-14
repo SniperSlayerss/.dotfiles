@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/rose-pine-moon.toml", "~/.config/alacritty/monitors.toml"]
+general.import = ["~/.config/alacritty/rose-pine-moon.toml", "~/.config/alacritty/monitors.toml"]
 
 [window]
   opacity = 1
@@ -11,4 +11,3 @@ import = ["~/.config/alacritty/rose-pine-moon.toml", "~/.config/alacritty/monito
 
 [env]
     TERM = "xterm-256color"
-
