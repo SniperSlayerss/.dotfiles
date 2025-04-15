@@ -1,5 +1,5 @@
-DOTFILES_SHARED_DIR := $(CURDIR)/shared
-BACKUP_DIR := $(HOME)/dotfiles.bak
+DOTFILES_SHARED_DIR := $(CURDIR)/home
+BACKUP_DIR := $(HOME)/.dotfiles.bak
 
 # format: "source:destination"
 DOTFILES_SHARED := \
@@ -25,7 +25,7 @@ install: clean link
 # Create symlinks
 .PHONY: link
 link:
-	@echo "Creating symlinks..."
+	@echo "INFO: Creating symlinks..."
 	@$(foreach dotfile, $(DOTFILES_SHARED), \
 	    src=$(word 1,$(subst :, ,$(dotfile))); \
 	    dest=$(word 2,$(subst :, ,$(dotfile))); \
@@ -36,7 +36,7 @@ link:
 # Remove existing files or directories
 .PHONY: clean
 clean:
-	@echo "Removing existing files or directories..."
+	@echo "INFO: Removing existing files or directories..."
 	@$(foreach dotfile, $(DOTFILES_SHARED), \
 	    dest=$(word 2,$(subst :, ,$(dotfile))); \
 	    if [ -e $$(eval echo $$dest) ] || [ -L $$(eval echo $$dest) ]; then \
@@ -47,7 +47,7 @@ clean:
 
 .PHONY: backup
 backup:
-	@echo "Backing up existing files or directories..."
+	@echo "INFO: Backing up existing files or directories..."
 	@mkdir -p $(BACKUP_DIR)
 	@$(foreach dotfile, $(DOTFILES_SHARED), \
 	    src=$(word 1,$(subst :, ,$(dotfile))); \
