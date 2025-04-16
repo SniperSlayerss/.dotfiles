@@ -28,3 +28,9 @@ fi
 echo "INFO: Installing nvim"
 sudo make install
 
+if ! command -v nvim >/dev/null 2>&1; then
+  echo "ERROR: cannot install nvim"
+  exit 1
+fi
+
+echo "INFO: Successfully installed nvim"
