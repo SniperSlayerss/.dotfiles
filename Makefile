@@ -15,7 +15,8 @@ DOTFILES_SHARED := \
     .config/tms:~/.config/tms \
     .config/tofi:~/.config/tofi \
     .config/ghostty:~/.config/ghostty \
-    .config/waybar:~/.config/waybar
+    .config/waybar:~/.config/waybar \
+    .config/sway:~/.config/sway \
 
 
 # Default target: Install all dotfiles
