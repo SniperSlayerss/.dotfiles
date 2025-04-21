@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="eastwood"
 plugins=(git fzf)
 
 source $ZSH/oh-my-zsh.sh
@@ -9,16 +9,14 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/nvim-linux64/bin:$PATH"
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-eval "$(pyenv virtualenv-init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init - zsh)"
+# eval "$(pyenv virtualenv-init -)"
 
 export FZF_CTRL_R_OPTS="--height 10"
 export FZF_ALT_C_OPTS='--no-height --no-reverse'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 
 fzf_open() {
   local file
