@@ -104,6 +104,35 @@
    `(dired-ignored ((t (list :foreground ,rose
                               :inherit 'unspecified))))
 
+    ;; Ivy / Counsel
+    `(ivy-current-match ((t (:background ,highlight_high :foreground ,text :weight bold))))
+    `(ivy-minibuffer-match-face-1 ((t (:background ,base :foreground ,subtle))))
+    `(ivy-minibuffer-match-face-2 ((t (:background ,highlight_med :foreground ,rose :weight semi-bold))))
+    `(ivy-minibuffer-match-face-3 ((t (:background ,highlight_med :foreground ,gold :weight semi-bold))))
+    `(ivy-minibuffer-match-face-4 ((t (:background ,highlight_med :foreground ,foam :weight semi-bold))))
+    `(ivy-virtual ((t (:foreground ,text))))
+    `(ivy-subdir ((t (:foreground ,foam :weight bold))))
+    `(ivy-action ((t (:foreground ,iris))))
+    `(ivy-highlight-face ((t (:foreground ,rose :underline t))))
+
+    ;; Projectile
+    `(projectile-path-face ((t (:foreground ,foam))))
+    `(projectile-project-name-face ((t (:foreground ,iris :weight bold))))
+    `(projectile-dir-heading ((t (:foreground ,rose :weight bold))))
+    `(projectile-file-name-face ((t (:foreground ,text))))
+
+    ;; Company
+    `(company-tooltip ((t (:background ,overlay :foreground ,text))))
+    `(company-tooltip-selection ((t (:background ,highlight_med :foreground ,text))))
+    `(company-tooltip-common ((t (:foreground ,gold :weight bold))))
+    `(company-tooltip-common-selection ((t (:foreground ,gold :weight bold))))
+    `(company-tooltip-annotation ((t (:foreground ,foam))))
+    `(company-tooltip-annotation-selection ((t (:foreground ,foam))))
+    `(company-scrollbar-bg ((t (:background ,surface))))
+    `(company-scrollbar-fg ((t (:background ,highlight_high))))
+    `(company-preview ((t (:background ,highlight_low :foreground ,subtle))))
+    `(company-preview-common ((t (:foreground ,rose :background ,highlight_low :weight bold))))
+    `(company-echo-common ((t (:foreground ,gold))))
    ))
 
 ;; Add to custom-theme-load-path

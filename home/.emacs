@@ -6,8 +6,8 @@
 ;;1, package config
 ;; treesitter
 (require-package
-  'tree-sitter
-  'tree-sitter-langs)
+ 'tree-sitter
+ 'tree-sitter-langs)
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
@@ -37,6 +37,10 @@
 (add-to-list 'projectile-globally-ignored-files ".venv")
 (setq projectile-project-search-path '("~/personal/"))
 (projectile-discover-projects-in-search-path)
+
+;; company
+(require-package 'company)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; other
 (require-package
@@ -95,7 +99,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>ik") 'counsel-describe-function)
 (evil-define-key 'normal 'global (kbd "<leader>iv") 'counsel-describe-variable)
 (evil-define-key 'normal 'global (kbd "<leader>is") 'counsel-describe-symbol)
-(evil-define-key 'normal 'global (kbd "<leader>cm") 'counsel-M-x)
+(evil-define-key 'normal 'global (kbd "<leader>im") 'counsel-M-x)
 
 ;; projectile
 (evil-define-key 'normal 'global (kbd "<leader>pf") 'projectile-find-file)
