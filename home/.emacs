@@ -22,9 +22,10 @@
 (ido-ubiquitous-mode 1)
 
 ;; evil
+(setq evil-want-C-u-scroll t)
+(setq-default evil-kill-on-visual-paste nil)
 (require-package 'evil)
 (evil-mode 1)
-(setq-default evil-kill-on-visual-paste nil)
 
 ;; which-key
 (require-package 'which-key)

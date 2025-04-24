@@ -6,6 +6,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 
+-- replaced by ] and [ with treesitter function jumping
+vim.keymap.set("n", "]]", "<nop>")
+vim.keymap.set("n", "[[", "<nop>")
+
 local function c_d()
   vim.opt.lazyredraw = true
   local cd_key = vim.api.nvim_replace_termcodes("<C-d>", true, false, true)
