@@ -43,18 +43,18 @@
    `(font-lock-warning-face ((t (:foreground ,gold))))
    `(font-lock-negation-char-face ((t (:foreground ,subtle))))
 
-   ;; tree-sitter faces
-   `(tree-sitter-hl-face:function.call ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:punctuation ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:punctuation.delimiter ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:operator ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:type.builtin ((t (:foreground ,foam))))
-   `(tree-sitter-hl-face:function.builtin ((t (:foreground ,pine))))
-   `(tree-sitter-hl-face:constant ((t (:foreground ,gold))))
-   `(tree-sitter-hl-face:property ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:constructor ((t (:foreground ,text))))
-   `(tree-sitter-hl-face:number ((t (:foreground ,rose))))
-   `(tree-sitter-hl-face:label ((t (:foreground ,iris))))
+    ;; tree-sitter faces
+    `(tree-sitter-hl-face:function.call ((t (:foreground ,rose))))
+    `(tree-sitter-hl-face:punctuation ((t (:foreground ,subtle))))
+    `(tree-sitter-hl-face:punctuation.delimiter ((t (:foreground ,subtle))))
+    `(tree-sitter-hl-face:operator ((t (:foreground ,subtle))))
+    `(tree-sitter-hl-face:type.builtin ((t (:foreground ,foam))))
+    `(tree-sitter-hl-face:function.builtin ((t (:foreground ,pine))))
+    `(tree-sitter-hl-face:constant ((t (:foreground ,gold))))
+    `(tree-sitter-hl-face:property ((t (:foreground ,text))))
+    `(tree-sitter-hl-face:constructor ((t (:foreground ,text))))
+    `(tree-sitter-hl-face:number ((t (:foreground ,rose))))
+    `(tree-sitter-hl-face:label ((t (:foreground ,iris))))
 
    ;; lsp
    `(lsp-face-highlight-textual ((t (:background ,highlight_med))))
@@ -102,24 +102,24 @@
    ;; dired
    `(dired-directory ((t (:foreground ,foam :weight bold))))
    `(dired-ignored ((t (list :foreground ,rose
-                              :inherit 'unspecified))))
+			     :inherit 'unspecified))))
 
-    ;; Ivy / Counsel
-    `(ivy-current-match ((t (:background ,highlight_high :foreground ,text :weight bold))))
-    `(ivy-minibuffer-match-face-1 ((t (:background ,base :foreground ,subtle))))
-    `(ivy-minibuffer-match-face-2 ((t (:background ,highlight_med :foreground ,rose :weight semi-bold))))
-    `(ivy-minibuffer-match-face-3 ((t (:background ,highlight_med :foreground ,gold :weight semi-bold))))
-    `(ivy-minibuffer-match-face-4 ((t (:background ,highlight_med :foreground ,foam :weight semi-bold))))
-    `(ivy-virtual ((t (:foreground ,text))))
-    `(ivy-subdir ((t (:foreground ,foam :weight bold))))
-    `(ivy-action ((t (:foreground ,iris))))
-    `(ivy-highlight-face ((t (:foreground ,rose :underline t))))
+   ;; Ivy / Counsel
+   `(ivy-current-match ((t (:background ,highlight_high :foreground ,text :weight bold))))
+   `(ivy-minibuffer-match-face-1 ((t (:background ,base :foreground ,subtle))))
+   `(ivy-minibuffer-match-face-2 ((t (:background ,highlight_med :foreground ,rose :weight semi-bold))))
+   `(ivy-minibuffer-match-face-3 ((t (:background ,highlight_med :foreground ,gold :weight semi-bold))))
+   `(ivy-minibuffer-match-face-4 ((t (:background ,highlight_med :foreground ,foam :weight semi-bold))))
+   `(ivy-virtual ((t (:foreground ,text))))
+   `(ivy-subdir ((t (:foreground ,foam :weight bold))))
+   `(ivy-action ((t (:foreground ,iris))))
+   `(ivy-highlight-face ((t (:foreground ,rose :underline t))))
 
-    ;; Projectile
-    `(projectile-path-face ((t (:foreground ,foam))))
-    `(projectile-project-name-face ((t (:foreground ,iris :weight bold))))
-    `(projectile-dir-heading ((t (:foreground ,rose :weight bold))))
-    `(projectile-file-name-face ((t (:foreground ,text))))
+   ;; Projectile
+   `(projectile-path-face ((t (:foreground ,foam))))
+   `(projectile-project-name-face ((t (:foreground ,iris :weight bold))))
+   `(projectile-dir-heading ((t (:foreground ,rose :weight bold))))
+   `(projectile-file-name-face ((t (:foreground ,text))))
 
     ;; Company
     `(company-tooltip ((t (:background ,overlay :foreground ,text))))

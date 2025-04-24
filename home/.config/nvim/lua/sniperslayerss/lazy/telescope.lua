@@ -68,7 +68,7 @@ return {
       local opts = {
         cwd = cwd,
         hidden = true,
-        no_ignore = true,
+        no_ignore = false,
         file_ignore_patterns = { ".git/" },
       }
       builtin.find_files(opts)
@@ -78,7 +78,7 @@ return {
     vim.keymap.set("n", "<leader>pf", function()
       builtin.find_files({
         hidden = true,
-        no_ignore = true,
+        no_ignore = false,
         file_ignore_patterns = { ".git/" },
       })
     end, {})
