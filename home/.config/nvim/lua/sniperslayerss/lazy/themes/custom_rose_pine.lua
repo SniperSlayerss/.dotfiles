@@ -314,13 +314,17 @@ return {
 
         ["@variable"] = { fg = palette.text, italic = styles.italic },
         ["@variable.builtin"] = { fg = palette.love, italic = styles.italic, bold = styles.bold },
-        ["@variable.parameter"] = { fg = palette.text, italic = styles.italic },
+        ["@variable.parameter"] = { fg = palette.iris, italic = styles.italic },
+        ["@variable.parameter.c"] = { fg = palette.text, italic = styles.italic },
         ["@variable.parameter.builtin"] = { fg = palette.text, italic = styles.italic, bold = styles.bold },
         ["@variable.member"] = { fg = palette.text },
 
-        ["@constant"] = { fg = palette.text },
+        ["@constant"] = { fg = palette.pine},
         ["@constant.builtin"] = { fg = palette.pine, bold = styles.bold },
-        ["@constant.macro"] = { fg = palette.text },
+        ["@constant.macro"] = { fg = palette.pine},
+        ["@constant.macro.c"] = { fg = palette.text},
+        ["@constant.c"] = { fg = palette.text},
+        -- ["@constant.macro.c"] = { fg = palette.iris},
 
         ["@module"] = { fg = palette.text },
         ["@module.c"] = { fg = palette.pine },
@@ -468,6 +472,7 @@ return {
         ["@lsp.type.property"] = { link = "@property" },
         ["@lsp.type.variable"] = {},   -- defer to treesitter for regular variables
         ["@lsp.type.variable.svelte"] = { link = "@variable" },
+        -- ["@lsp.type.macro.c"] = { link = "@constant.macro.c" },
         ["@lsp.typemod.function.defaultLibrary"] = { link = "@function.builtin" },
         ["@lsp.typemod.operator.injected"] = { link = "@operator" },
         ["@lsp.typemod.string.injected"] = { link = "@string" },
