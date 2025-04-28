@@ -314,7 +314,7 @@ return {
 
         ["@variable"] = { fg = palette.text, italic = styles.italic },
         ["@variable.builtin"] = { fg = palette.love, italic = styles.italic, bold = styles.bold },
-        ["@variable.parameter"] = { fg = palette.iris, italic = styles.italic },
+        ["@variable.parameter"] = { fg = palette.text, italic = styles.italic },
         ["@variable.parameter.c"] = { fg = palette.text, italic = styles.italic },
         ["@variable.parameter.builtin"] = { fg = palette.text, italic = styles.italic, bold = styles.bold },
         ["@variable.member"] = { fg = palette.text },

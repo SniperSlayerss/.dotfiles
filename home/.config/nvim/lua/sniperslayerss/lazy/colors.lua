@@ -8,4 +8,4 @@ local rose_pine_dawn = require("rose_pine_dawn")
 local alabaster = require("alabaster")
 local gruber_darker = require("gruber_darker_theme")
 
-return gruber_darker
+return rose_pine

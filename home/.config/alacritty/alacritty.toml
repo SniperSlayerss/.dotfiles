@@ -1,4 +1,4 @@
-general.import = ["~/.config/alacritty/gruber_darker.toml"]
+general.import = ["~/.config/alacritty/rose_pine_moon.toml"]
 
 [window]
   opacity = 1
