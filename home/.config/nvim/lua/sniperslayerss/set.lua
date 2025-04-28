@@ -32,3 +32,5 @@ vim.opt.cursorline = true
 
 vim.opt.splitright = true
 -- vim.opt.colorcolumn = "80"
+
+vim.highlight.priorities.semantic_tokens = 95
