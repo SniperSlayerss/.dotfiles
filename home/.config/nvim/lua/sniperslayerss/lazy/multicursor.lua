@@ -15,10 +15,10 @@ return
     set({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
 
     -- Add or skip adding a new cursor by matching word/selection
-    -- set({ "n", "x" }, "<leader>n", function() mc.matchAddCursor(1) end)
-    -- set({ "n", "x" }, "<leader>s", function() mc.matchSkipCursor(1) end)
-    -- set({ "n", "x" }, "<leader>N", function() mc.matchAddCursor(-1) end)
-    -- set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
+    set({ "n", "x" }, "<leader>m", function() mc.matchAddCursor(1) end)
+    set({ "n", "x" }, "<leader>sm", function() mc.matchSkipCursor(1) end)
+    set({ "n", "x" }, "<leader>M", function() mc.matchAddCursor(-1) end)
+    set({ "n", "x" }, "<leader>Sm", function() mc.matchSkipCursor(-1) end)
 
     -- Add and remove cursors with control + left click.
     set("n", "<c-leftmouse>", mc.handleMouse)
@@ -38,8 +38,8 @@ return
     set("n", "<leader>N", function() mc.searchAddCursor(-1) end)
 
     -- Jump to the next/previous search result without adding a cursor.
-    set("n", "<leader>s", function() mc.searchSkipCursor(1) end)
-    set("n", "<leader>S", function() mc.searchSkipCursor(-1) end)
+    set("n", "<leader>sn", function() mc.searchSkipCursor(1) end)
+    set("n", "<leader>Sn", function() mc.searchSkipCursor(-1) end)
 
     -- Mappings defined in a keymap layer only apply when there are
     -- multiple cursors. This lets you have overlapping mappings.
@@ -53,6 +53,15 @@ return
 
       -- Enable and clear cursors using escape.
       layerSet("n", "<esc>", function()
+        if not mc.cursorsEnabled() then
+          mc.enableCursors()
+        else
+          mc.clearCursors()
+        end
+      end)
+
+
+      layerSet("n", "<C-c>", function()
         if not mc.cursorsEnabled() then
           mc.enableCursors()
         else
