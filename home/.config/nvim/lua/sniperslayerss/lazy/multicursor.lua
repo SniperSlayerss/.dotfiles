@@ -26,9 +26,9 @@ return
     set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
     -- Disable and enable cursors.
-    set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+    set({ "n", "x" }, "<M-q>", mc.toggleCursor)
 
-    set("n", "<leader>a", mc.alignCursors)
+    set("n", "<leader>=", mc.alignCursors)
 
     set("x", "<leader>t", function() mc.transposeCursors(1) end)
     set("x", "<leader>T", function() mc.transposeCursors(-1) end)
@@ -60,13 +60,16 @@ return
         end
       end)
 
-
-      layerSet("n", "<C-c>", function()
+      layerSet("n", "<C-x>", function()
         if not mc.cursorsEnabled() then
           mc.enableCursors()
         else
-          mc.clearCursors()
+          mc.disableCursors()
         end
+      end)
+
+      layerSet("n", "<C-c>", function()
+        mc.clearCursors()
       end)
     end)
 
