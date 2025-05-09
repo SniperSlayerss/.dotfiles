@@ -36,7 +36,7 @@ return {
 
     vim.treesitter.language.register("templ", "templ")
 
-    vim.keymap.set({ "n", "v" }, "<C-k>", function()
+    vim.keymap.set({ "n", "v" }, "<C-Down>", function()
       vim.opt.lazyredraw = true
       require("nvim-treesitter.textobjects.move").goto_next_start({
         "@function.outer",
@@ -47,7 +47,7 @@ return {
       vim.cmd("redraw")
     end, { desc = "Jump to next function or class via Treesitter" })
 
-    vim.keymap.set({ "n", "v" }, "<C-l>", function()
+    vim.keymap.set({ "n", "v" }, "<C-Right>", function()
       vim.opt.lazyredraw = true
       require("nvim-treesitter.textobjects.move").goto_next_end({
         "@function.outer",
@@ -58,7 +58,7 @@ return {
       vim.cmd("redraw")
     end, { desc = "Jump to next function end or class end via Treesitter" })
 
-    vim.keymap.set({ "n", "v" }, "<C-j>", function()
+    vim.keymap.set({ "n", "v" }, "<C-Up>", function()
       vim.opt.lazyredraw = true
       require("nvim-treesitter.textobjects.move").goto_previous_start({
         "@function.outer",
@@ -69,7 +69,7 @@ return {
       vim.cmd("redraw")
     end, { desc = "Jump to previous function or class via Treesitter" })
 
-    vim.keymap.set({ "n", "v" }, "<C-h>", function()
+    vim.keymap.set({ "n", "v" }, "<C-Left>", function()
       vim.opt.lazyredraw = true
       require("nvim-treesitter.textobjects.move").goto_previous_end({
         "@function.outer",
