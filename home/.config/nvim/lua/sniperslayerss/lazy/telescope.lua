@@ -103,6 +103,8 @@ return {
     end)
     vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+
     -- Add a keybinding for listing projects
     vim.keymap.set("n", "<leader>pp", function()
       require("telescope").extensions.projects.projects({
