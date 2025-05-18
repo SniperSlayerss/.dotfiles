@@ -1,7 +1,7 @@
 general.import = ["~/.config/alacritty/rose_pine_moon.toml"]
 
 [window]
-  opacity = 1
+  opacity = 0.98
 
 [font]
   normal = { family = "IosevkaNerdFontMono", style = "Regular" }

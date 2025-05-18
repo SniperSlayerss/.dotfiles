@@ -3,9 +3,9 @@
 	"position": "top",
 
 	"modules-left": [
-		"sway/mode",
-		"sway/workspaces",
-		"sway/window"
+		"hyprland/mode",
+		"hyprland/workspaces",
+		"hyprland/window"
 	],
 
 	"modules-right": [
