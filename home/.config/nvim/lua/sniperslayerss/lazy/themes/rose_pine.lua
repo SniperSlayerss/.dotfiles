@@ -1,7 +1,8 @@
 return {
   {
-    "SniperSlayerss/rose-pine-nvim",
-    -- dir = "~/personal/rose-pine-nvim",
+    -- "rose-pine/neovim",
+    -- "SniperSlayerss/rose-pine-nvim",
+    dir = "~/personal/rose-pine-nvim",
     name = "rose-pine",
     config = function()
       require('rose-pine').setup({
