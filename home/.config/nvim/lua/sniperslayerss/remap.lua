@@ -31,22 +31,6 @@ local function c_u()
 end
 vim.keymap.set("n", "<C-u>", c_u)
 
-
-local function Hzz()
-  vim.opt.lazyredraw = true
-  vim.cmd("normal! Hzz")
-  vim.opt.lazyredraw = false
-end
-vim.keymap.set("n", "H", Hzz)
-
-local function Lzz()
-  vim.opt.lazyredraw = true
-  vim.cmd("normal! Lzz")
-  vim.opt.lazyredraw = false
-  vim.cmd("redraw")
-end
-vim.keymap.set("n", "L", Lzz)
-
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -63,7 +47,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
