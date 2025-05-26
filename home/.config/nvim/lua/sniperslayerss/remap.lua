@@ -45,6 +45,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR><Esc>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-[>", "<Cmd>noh<CR><Esc>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "Q", "<nop>")
 

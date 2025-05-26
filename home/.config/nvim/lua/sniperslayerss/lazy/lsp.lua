@@ -28,29 +28,18 @@ return {
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
+        "clangd",
       },
-      handlers = {
-        function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup {
-            capabilities = capabilities
-          }
-        end,
+    })
 
-        ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup {
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = { version = "Lua 5.1" },
-                diagnostics = {
-                  globals = { "vim", "it", "describe", "before_each", "after_each" },
-                }
-              }
-            }
-          }
-        end,
-      }
+    local lspconfig = require("lspconfig")
+    local default_servers = { "lua_ls", "rust_analyzer" }
+    for _, name in ipairs(default_servers) do
+      lspconfig[name].setup({})
+    end
+
+    lspconfig.clangd.setup({
+      cmd = { "clangd", "--fallback-style=webkit" },
     })
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
