@@ -43,4 +43,5 @@ bindkey '^f' fzf_dir
 bindkey '\er' tms_open
 
 alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland"
+alias vi="nvim"
 # eval $(opam env)
