@@ -29,13 +29,14 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "clangd",
-            }
+            },
+            highlight = { enable = true },
         })
 
         -- clangd with WebKit fallback style
         vim.lsp.config("clangd", {
-          cmd = { "clangd", "--fallback-style=WebKit" },
-          -- any additional clangd-specific settings
+            cmd = { "clangd", "--fallback-style=WebKit" },
+            -- any additional clangd-specific settings
         })
 
         -- default setups for other servers
