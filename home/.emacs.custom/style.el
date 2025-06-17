@@ -2,7 +2,7 @@
 (load-theme 'rose-pine t)
 
 (add-to-list 'default-frame-alist
-             '(font . "FiraCode Nerd Font-14"))
+             '(font . "IosevkaNerdFontMono-18"))
 
 ;; Emacs standard config changes
 (setq vc-follow-symlinks t)

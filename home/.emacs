@@ -1,58 +1,58 @@
 (load-file "~/.emacs.custom/require.el")
 (load-file "~/.emacs.custom/style.el")
 (load-file "~/.emacs.custom/utils.el")
-(setq use-package-verbose t)
 
 ;;1, package config
 ;; treesitter
-(require-package
- 'tree-sitter
- 'tree-sitter-langs)
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(use-package tree-sitter
+  :config (global-tree-sitter-mode))
+
+(use-package tree-sitter-langs
+  :after tree-sitter
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode))
 
 ;; yasnippet
-(require-package 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :config (yas-global-mode 1))
 
 ;; ido-completing-read+
-(require-package 'ido-completing-read+)
-(ido-mode 1)
-(ido-everywhere 1)
-(ido-ubiquitous-mode 1)
+(use-package ido-completing-read+
+  :init
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1))
 
 ;; evil
-(setq evil-want-C-u-scroll t)
-(setq-default evil-kill-on-visual-paste nil)
-(require-package 'evil)
-(evil-mode 1)
+(use-package evil
+  :init
+  (setq evil-want-C-u-scroll t
+        evil-kill-on-visual-paste nil)
+  :config (evil-mode 1))
 
 ;; which-key
-(require-package 'which-key)
-(which-key-mode)
+(use-package which-key
+  :config (which-key-mode))
 
 ;; projectile
-(require-package 'projectile)
-(projectile-mode +1)
-(add-to-list 'projectile-globally-ignored-directories ".venv")
-(add-to-list 'projectile-globally-ignored-files ".venv")
-(setq projectile-project-search-path '("~/personal/"))
-(projectile-discover-projects-in-search-path)
+(use-package projectile
+  :init
+  (setq projectile-project-search-path '("~/personal/")
+        projectile-globally-ignored-directories '(".venv")
+        projectile-globally-ignored-files '(".venv"))
+  :config
+  (projectile-mode +1)
+  (projectile-discover-projects-in-search-path))
 
 ;; company
-(require-package 'company)
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+  :hook (after-init . global-company-mode))
 
 ;; other
-(require-package
- 'delight
- 'magit
- 'harpoon
- 'ivy
- 'counsel
- 'counsel-projectile
- 'smex
- 'drag-stuff)
+(use-package delight)
+(use-package magit)
+(use-package harpoon)
+(use-package smex)
+(use-package drag-stuff)
 
 ;;2, general config
 ;;(add-hook 'before-save-hook 'auto-indent-on-save)
@@ -67,8 +67,7 @@
            (eldoc-mode nil "eldoc")
            (tree-sitter-mode nil "tree-sitter")
            (projectile-mode nil "projectile")
-           (eglot-mode nil "eglot")
-           ))
+           (eglot-mode nil "eglot")))
 
 ;; keybinds
 (evil-set-leader 'normal (kbd "SPC"))
@@ -90,17 +89,6 @@
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;; counsel
-(evil-define-key 'normal 'global (kbd "<leader>fp") 'counsel-projectile-find-file)
-(evil-define-key 'normal 'global (kbd "<leader>fg") 'counsel-projectile-grep)
-(evil-define-key 'normal 'global (kbd "<leader>ig") 'counsel-grep)
-(evil-define-key 'normal 'global (kbd "<leader>fb") 'counsel-ibuffer)
-(evil-define-key 'normal 'global (kbd "<leader>id") 'counsel-dired)
-(evil-define-key 'normal 'global (kbd "<leader>ik") 'counsel-describe-function)
-(evil-define-key 'normal 'global (kbd "<leader>iv") 'counsel-describe-variable)
-(evil-define-key 'normal 'global (kbd "<leader>is") 'counsel-describe-symbol)
-(evil-define-key 'normal 'global (kbd "<leader>im") 'counsel-M-x)
 
 ;; projectile
 (evil-define-key 'normal 'global (kbd "<leader>pf") 'projectile-find-file)
