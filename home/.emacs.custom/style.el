@@ -17,3 +17,6 @@
 (setq initial-scratch-message nil)
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
+
+(set-frame-parameter nil 'alpha-background 95)
+(add-to-list 'default-frame-alist '(alpha-background . 95))
