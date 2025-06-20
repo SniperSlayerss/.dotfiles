@@ -9,19 +9,34 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-;; LSP mode
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook ((c-mode c++-mode python-mode rust-mode) . lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l"
-        lsp-enable-snippet nil
-	lsp-semantic-tokens-enable nil
-        lsp-prefer-flymake nil))
+;; Eglot mode (built-in LSP client in Emacs 30)
+(use-package eglot
+  :ensure nil
+  :hook ((c-mode c++-mode python-mode rust-mode emacs-lisp-mode) . eglot-ensure)
+  :config
 
-(setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-modeline-code-actions-enable nil)
-(add-hook 'lsp-managed-mode-hook (lambda () (flymake-mode -1)))
+;; Disable hover highlights and inlay hints
+  (setq eldoc-echo-area-use-multiline-p nil
+        eldoc-echo-area-display-truncation-message nil
+        eglot-auto-display-help-buffer nil)
+
+  ;; Disable inlay hints globally
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
+
+  ;; Disable document highlights (hover highlighting)
+  (add-to-list 'eglot-ignored-server-capabilities :documentHighlightProvider)
+
+  ;; Disable breadcrumb (headerline)
+  (setq eglot-report-progress nil)
+
+  ;; Disable code actions in modeline
+  (setq eglot-extend-to-xref t)
+
+  ;; Disable flymake when eglot is active (equivalent to your lsp-managed-mode-hook)
+  (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1)))
+
+  ;; Optional: Configure completion behavior
+  (setq completion-category-overrides '((eglot (styles orderless)))))
 
 ;; yasnippet
 (use-package yasnippet
@@ -88,8 +103,19 @@
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t
-        evil-kill-on-visual-paste nil)
+        evil-kill-on-visual-paste nil
+        evil-want-keybinding nil)
   :config (evil-mode 1))
+
+;; evil-collection
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+;; general
+(use-package general
+  :ensure t)
 
 ;; which-key
 (use-package which-key
@@ -97,8 +123,8 @@
 
 ;; company
 (use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode))
+  :after eglot
+  :hook (eglot-managed-mode . company-mode))
 
 ;; other
 (use-package delight)
@@ -127,54 +153,89 @@
 ;; keybinds
 (evil-set-leader 'normal (kbd "SPC"))
 
-;; standard
-(evil-define-key 'normal 'global (kbd "<leader>fj") 'dired-jump)
-(evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
-(evil-define-key 'normal 'global (kbd "<leader>fa") 'auto-indent-on-save)
-(evil-define-key 'normal 'global (kbd "<leader>cc") 'compile)
-(evil-define-key 'normal 'global (kbd "<leader>bn") 'next-buffer)
-(evil-define-key 'normal 'global (kbd "<leader>bp") 'previous-buffer)
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-<backspace>") 'alt/backward-kill-word)
+(general-create-definer my/leader
+  :states '(normal visual motion operator)
+  :keymaps 'override
+  :prefix "SPC"
+  :non-normal-prefix "C-SPC")
 
-;; drag-stuff
-(evil-define-key 'visual 'global (kbd "J") 'drag-stuff-down)
-(evil-define-key 'visual 'global (kbd "K") 'drag-stuff-up)
+(my/leader
+  ;; Files & buffers
+  "fj"  '(dired-jump                     :which-key "dired jump")
+  "ff"  '(find-file                      :which-key "find file")
+  "fa"  '(auto-indent-on-save            :which-key "auto-indent on save")
+  "fb"  '(consult-buffer                 :which-key "switch buffer")
+  "bn"  '(next-buffer                    :which-key "next buffer")
+  "bp"  '(previous-buffer                :which-key "previous buffer")
 
-;; smex
-(global-set-key (kbd "s-x") 'execute-extended-command)
+  ;; Compilation
+  "cc"  '(compile                        :which-key "compile")
 
-;; consult
-(evil-define-key 'normal 'global (kbd "<leader>cl") 'consult-line)
-(evil-define-key 'normal 'global (kbd "<leader>cy") 'consult-yank-pop)
-(evil-define-key 'normal 'global (kbd "<leader>fb") 'consult-buffer)
+  ;; Consult
+  "cl"  '(consult-line                   :which-key "consult line")
+  "cy"  '(consult-yank-pop               :which-key "yank history")
 
-;; consult + projectile
-(evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-projectile-find-file)
-(evil-define-key 'normal 'global (kbd "<leader>pg") 'consult-projectile-ripgrep)
-(evil-define-key 'normal 'global (kbd "<leader>pb") 'consult-projectile-switch-to-buffer)
-(evil-define-key 'normal 'global (kbd "<leader>pd") 'projectile-dired)
-(evil-define-key 'normal 'global (kbd "<leader>pw") 'consult-projectile-switch-project)
+  ;; Projectile + Consult
+  "pp"  '(projectile-switch-project      :which-key "switch project")
+  "pf"  '(consult-projectile-find-file   :which-key "find in project")
+  "pg"  '(consult-projectile-ripgrep     :which-key "project grep")
+  "pb"  '(consult-projectile-switch-to-buffer :which-key "project buffer")
+  "pd"  '(projectile-dired               :which-key "project dired")
+  "pw"  '(consult-projectile-switch-project :which-key "switch project")
 
-;; lsp
-(evil-define-key 'normal 'global (kbd "<leader>ld") 'lsp-find-definition)
-(evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
-(evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-describe-thing-at-point)
-(evil-define-key 'normal 'global (kbd "<leader>ls") 'consult-lsp-symbols)
-(evil-define-key 'normal 'global (kbd "<leader>le") 'consult-lsp-diagnostics)
-(evil-define-key 'normal 'global (kbd "C-c l") 'lsp-disconnect)
+  ;; Eglot / LSP
+  "ld"  '(xref-find-definitions          :which-key "go to def")
+  "lr"  '(xref-find-references           :which-key "find refs")
+  "lh"  '(eldoc-doc-buffer               :which-key "help hover")
+  "ls"  '(eglot-find-references          :which-key "find refs (eglot)")
+  "le"  '(flymake-show-buffer-diagnostics :which-key "show diagnostics")
+  "la"  '(eglot-code-actions             :which-key "code actions")
+  "ln"  '(eglot-rename                   :which-key "rename")
+  "lf"  '(eglot-format                   :which-key "format")
+  "li"  '(eglot-find-implementation      :which-key "go to impl")
+  "lt"  '(eglot-find-typeDefinition      :which-key "go to type")
+  ;; special shutdown
+  "C-c l" '(eglot-shutdown               :which-key "shutdown LSP")
+  ;; duplicate format
+  "fd"  '(eglot-format                   :which-key "format")
 
-(evil-define-key 'normal 'global (kbd "<leader>fd") 'lsp-format-buffer)
-(evil-define-key 'normal 'global (kbd "K") 'lsp-ui-doc-glance)
+  ;; Harpoon quick nav - fix should be C-l...
+  "h1"  '(harpoon-go-to-1                :which-key "harpoon 1")
+  "h2"  '(harpoon-go-to-2                :which-key "harpoon 2")
+  "h3"  '(harpoon-go-to-3                :which-key "harpoon 3")
+  "h4"  '(harpoon-go-to-4                :which-key "harpoon 4")
+  "h5"  '(harpoon-go-to-5                :which-key "harpoon 5")
+  "hl"  '(harpoon-toggle-file            :which-key "toggle harpoon list")
+  "ha"  '(harpoon-add-file               :which-key "harpoon add")
+  )
 
-;; harpoon
-(global-set-key (kbd "C-1") 'harpoon-go-to-1)
-(global-set-key (kbd "C-2") 'harpoon-go-to-2)
-(global-set-key (kbd "C-3") 'harpoon-go-to-3)
-(global-set-key (kbd "C-4") 'harpoon-go-to-4)
-(global-set-key (kbd "C-5") 'harpoon-go-to-5)
-(global-set-key (kbd "C-l") 'harpoon-toggle-file)
-(global-set-key (kbd "C-a") 'harpoon-add-file)
+;; Visual-mode only
+(general-define-key
+ :states 'visual
+ :keymaps 'override
+ "J" 'drag-stuff-down
+ "K" 'drag-stuff-up)
+
+;; Non-leader / direct-key bindings via general
+(general-define-key
+ :keymaps 'override
+
+ "C-<backspace>"  'alt/backward-kill-word
+ "s-x"            'execute-extended-command)
+
+;; Insert mode
+(general-define-key
+  :states '(insert)
+  :keymaps 'override
+  "C-c" 'evil-normal-state)
+
+;; Everywhere but insert mode
+(general-define-key
+  :states '(normal visual motion operator emacs)
+  :keymaps 'override
+  "<escape>" 'keyboard-escape-quit)
+
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -187,7 +248,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("018226323614a09b36e730b961c048ae1c8747156537cfc2a9997a6bdee7ad17" "3a721cdbf1a79d6032bac37a6554216103521e7f717dd4b385fd584d56020f98" default))
  '(package-selected-packages
-   '(company consult-projectile counsel-projectile delight drag-stuff
-	     evil harpoon ido-completing-read+ lsp-ui magit marginalia
-	     orderless smex tree-sitter-langs vertico yasnippet)))
+   '(company consult-projectile counsel-projectile delight drag-stuff evil harpoon ido-completing-read+ lsp-ui magit marginalia orderless smex tree-sitter-langs vertico yasnippet)))
