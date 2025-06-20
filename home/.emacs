@@ -137,6 +137,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq gc-cons-threshold (* 50 1000 1000))
+(setq dired-dwim-target t)
 
 (delight '((lsp-mode nil "lsp-mode")
            (lsp-ui-mode nil "lsp-ui")
@@ -249,6 +250,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("018226323614a09b36e730b961c048ae1c8747156537cfc2a9997a6bdee7ad17" "3a721cdbf1a79d6032bac37a6554216103521e7f717dd4b385fd584d56020f98" default))
- '(package-selected-packages
-   '(company consult-projectile counsel-projectile delight drag-stuff evil harpoon ido-completing-read+ lsp-ui magit marginalia orderless smex tree-sitter-langs vertico yasnippet)))
+   '("018226323614a09b36e730b961c048ae1c8747156537cfc2a9997a6bdee7ad17"
+     "3a721cdbf1a79d6032bac37a6554216103521e7f717dd4b385fd584d56020f98"
+     default))
+ '(package-selected-packages nil))
