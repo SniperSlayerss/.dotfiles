@@ -134,6 +134,9 @@
 
 ;;2, general config
 ;;(add-hook 'before-save-hook 'auto-indent-on-save)
+(setq compile-command "")
+(setq projectile-project-compilation-cmd "")
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq gc-cons-threshold (* 50 1000 1000))
@@ -171,6 +174,7 @@
 
   ;; Compilation
   "cc"  '(compile                        :which-key "compile")
+  "pc"  '(projectile-compile-project     :which-key "project-compile")
 
   ;; Consult
   "cl"  '(consult-line                   :which-key "consult line")
