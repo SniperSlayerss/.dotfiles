@@ -134,6 +134,10 @@
 
 ;;2, general config
 ;;(add-hook 'before-save-hook 'auto-indent-on-save)
+
+(setq c-default-style "linux" ; Or "k&r" or whichever you prefer
+      c-basic-offset 4)
+
 (setq compile-command "")
 (setq projectile-project-compilation-cmd "")
 
