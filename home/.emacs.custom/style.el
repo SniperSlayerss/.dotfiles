@@ -13,6 +13,7 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 (setq make-backup-files nil)
+(setq create-lockfiles nil)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 (global-display-line-numbers-mode t)
