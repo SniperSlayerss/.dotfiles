@@ -131,10 +131,20 @@
 (use-package magit)
 (use-package harpoon)
 (use-package drag-stuff)
+(use-package multiple-cursors)
 
 ;;2, general config
 ;;(add-hook 'before-save-hook 'auto-indent-on-save)
-(setq c-default-style "linux"
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
+
+(setq-default evil-symbol-word-search t)
+
+(setq mc/always-run-for-all t)
+
+(setq c-default-style "linux" ;
       c-basic-offset 4)
 
 (setq compile-command "")
@@ -158,6 +168,11 @@
            (eglot-mode nil "eglot")))
 
 ;; keybinds
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 (evil-set-leader 'normal (kbd "SPC"))
 
 (general-create-definer my/leader
