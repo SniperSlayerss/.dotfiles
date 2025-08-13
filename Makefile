@@ -7,6 +7,7 @@ DOTFILES_SHARED := \
     .tmux.conf:~/.tmux.conf \
     .emacs:~/.emacs \
     .emacs.custom:~/.emacs.custom \
+    .emacs.d:~/.emacs.d\
     .config/alacritty:~/.config/alacritty \
     .config/hypr:~/.config/hypr \
     .config/i3:~/.config/i3 \
