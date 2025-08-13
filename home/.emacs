@@ -126,12 +126,39 @@
   :after eglot
   :hook (eglot-managed-mode . company-mode))
 
+;; jupyter
+(use-package jupyter
+  :init
+  (setq jupyter-executable "/home/jack/.local/bin/jupyter")
+  :ensure t
+  :config
+  ;; Enable jupyter in org-babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((jupyter . t)
+     (python . t)))
+  
+  ;; Don't prompt for confirmation when evaluating code blocks
+  (setq org-confirm-babel-evaluate nil))
+
+(setq org-babel-default-header-args:jupyter-python
+      '((:async . "yes")
+        (:session . "py")
+        (:kernel . "python3")))
+
+(setq org-startup-with-inline-images t)
+
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+(setq org-image-actual-width '(800))
+
 ;; other
 (use-package delight)
 (use-package magit)
 (use-package harpoon)
 (use-package drag-stuff)
 (use-package multiple-cursors)
+(use-package pyvenv)
 
 ;;2, general config
 ;;(add-hook 'before-save-hook 'auto-indent-on-save)
@@ -230,6 +257,13 @@
   "h5"  '(harpoon-go-to-5                :which-key "harpoon 5")
   "hl"  '(harpoon-toggle-file            :which-key "toggle harpoon list")
   "ha"  '(harpoon-add-file               :which-key "harpoon add")
+
+  "va"  '(pyvenv-activate                :which-key "activate venv")
+  "vd"  '(pyvenv-deactivate              :which-key "deactivate venv") 
+  "vw"  '(pyvenv-workon                  :which-key "workon venv")
+  
+  ;; Jupyter
+  "jr"  '(jupyter-run-repl               :which-key "run jupyter repl")
   )
 
 ;; Visual-mode only
