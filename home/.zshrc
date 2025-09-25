@@ -42,6 +42,7 @@ bindkey '^x' fzf_open
 bindkey '^f' fzf_dir
 bindkey '\er' tms_open
 
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
 alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland"
 alias vi="nvim"
 # eval $(opam env)
