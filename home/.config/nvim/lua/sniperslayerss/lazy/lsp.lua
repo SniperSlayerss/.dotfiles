@@ -79,5 +79,10 @@ return {
 
         -- remaps
         vim.keymap.set("n", "<leader>fd", vim.lsp.buf.format)
+
+        -- Switch between header and source file (clangd specific)
+        vim.keymap.set("n", "<leader>fs", function()
+            vim.cmd("ClangdSwitchSourceHeader")
+        end, { desc = "Switch between header and source file" })
     end
 }
