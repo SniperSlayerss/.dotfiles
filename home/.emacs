@@ -2,6 +2,10 @@
 (load-file "~/.emacs.custom/style.el")
 (load-file "~/.emacs.custom/utils.el")
 
+;; org mode
+(setq org-directory "~/org/")
+(setq org-agenda-files '("~/org/"))
+
 ;;1, package config
 ;; treesitter
 (use-package tree-sitter
