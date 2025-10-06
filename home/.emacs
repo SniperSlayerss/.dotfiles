@@ -2,10 +2,6 @@
 (load-file "~/.emacs.custom/style.el")
 (load-file "~/.emacs.custom/utils.el")
 
-;; org mode
-(setq org-directory "~/org/")
-(setq org-agenda-files '("~/org/"))
-
 ;;1, package config
 ;; treesitter
 (use-package tree-sitter
@@ -141,7 +137,7 @@
    'org-babel-load-languages
    '((jupyter . t)
      (python . t)))
-  
+
   ;; Don't prompt for confirmation when evaluating code blocks
   (setq org-confirm-babel-evaluate nil))
 
@@ -155,6 +151,28 @@
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
 (setq org-image-actual-width '(800))
+
+;; org mode
+(setq org-directory "~/org/")
+(setq org-agenda-files '("~/org/"))
+
+(setq org-preview-latex-image-directory "~/.emacs.d/ltximg/")
+(setq org-latex-create-formula-image-program 'dvisvgm)
+(setq org-agenda-files (directory-files-recursively "~/org" "\\.org$"))
+
+(with-eval-after-load 'org
+  (setq org-format-latex-options
+        (plist-put (copy-sequence org-format-latex-options) :scale 0.5)))
+
+(defun my/resize-org-latex-overlays ()
+  (cl-loop for o in (car (overlay-lists))
+     if (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay)
+     do (plist-put (cdr (overlay-get o 'display))
+		   :scale (expt text-scale-mode-step
+				text-scale-mode-amount))))
+
+(use-package org
+    :hook (org-mode . (lambda () (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t))))
 
 ;; other
 (use-package delight)
@@ -199,6 +217,7 @@
            (eglot-mode nil "eglot")))
 
 ;; keybinds
+(global-unset-key (kbd "C-x C-c"))   ;; disables closing emacs
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -263,13 +282,41 @@
   "ha"  '(harpoon-add-file               :which-key "harpoon add")
 
   "va"  '(pyvenv-activate                :which-key "activate venv")
-  "vd"  '(pyvenv-deactivate              :which-key "deactivate venv") 
+  "vd"  '(pyvenv-deactivate              :which-key "deactivate venv")
   "vw"  '(pyvenv-workon                  :which-key "workon venv")
-  
+
   ;; Jupyter
   "jr"  '(jupyter-run-repl               :which-key "run jupyter repl")
-  )
 
+  ;; Org prefix
+  "o" '(:ignore t :which-key "org")
+
+  ;; Core org
+  "oa" '(org-agenda         :which-key "agenda")
+  "oc" '(org-capture        :which-key "capture")
+  "ot" '(org-todo           :which-key "todo")
+  "os" '(org-schedule       :which-key "schedule")
+  "od" '(org-deadline       :which-key "deadline")
+  "oe" '(org-export-dispatch :which-key "export")
+  "ol" '(org-store-link     :which-key "store link")
+  "oi" '(org-insert-link    :which-key "insert link")
+
+  ;; Headings & subtrees
+  "oh" '(:ignore t :which-key "headings")
+  "ohn" '(org-next-visible-heading     :which-key "next heading")
+  "ohp" '(org-previous-visible-heading :which-key "previous heading")
+  "oh[" '(org-promote-subtree          :which-key "promote subtree")
+  "oh]" '(org-demote-subtree           :which-key "demote subtree")
+  "ohc" '(org-copy-subtree             :which-key "copy subtree")
+  "ohx" '(org-cut-subtree              :which-key "cut subtree")
+  "ohv" '(org-paste-subtree            :which-key "paste subtree")
+
+  ;; Clocking
+  "ok" '(:ignore t :which-key "clock")
+  "oki" '(org-clock-in   :which-key "clock in")
+  "oko" '(org-clock-out  :which-key "clock out")
+)
+ 
 ;; Visual-mode only
 (general-define-key
  :states 'visual

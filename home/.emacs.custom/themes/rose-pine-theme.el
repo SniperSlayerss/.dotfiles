@@ -23,7 +23,9 @@
       ( highlight_low  "#2a2a2a")
       ( highlight_med  "#444444")
       ( highlight_high "#565656")
-      ( dark_bg "#1A1618"))
+      ( dark_bg "#1A1618")
+      ;;#2a2930
+      )
 
   (custom-theme-set-variables
    'rose-pine
