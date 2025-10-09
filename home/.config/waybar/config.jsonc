@@ -9,11 +9,8 @@
 	],
 
 	"modules-right": [
+		"backlight",
 		"pulseaudio",
-        "backlight",
-        "network",
-		"temperature",
-		"memory",
 		"battery",
 		"clock#time"
 	],
