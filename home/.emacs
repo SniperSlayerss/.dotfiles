@@ -126,31 +126,6 @@
   :after eglot
   :hook (eglot-managed-mode . company-mode))
 
-;; jupyter
-(use-package jupyter
-  :init
-  (setq jupyter-executable "/home/jack/.local/bin/jupyter")
-  :ensure t
-  :config
-  ;; Enable jupyter in org-babel
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((jupyter . t)
-     (python . t)))
-
-  ;; Don't prompt for confirmation when evaluating code blocks
-  (setq org-confirm-babel-evaluate nil))
-
-(setq org-babel-default-header-args:jupyter-python
-      '((:async . "yes")
-        (:session . "py")
-        (:kernel . "python3")))
-
-(setq org-startup-with-inline-images t)
-
-(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-
-(setq org-image-actual-width '(800))
 
 ;; org mode
 (setq org-directory "~/org/")
@@ -173,6 +148,63 @@
 
 (use-package org
     :hook (org-mode . (lambda () (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t))))
+
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width '(800))
+(setq org-startup-with-latex-preview t)
+(setq org-bookmark-heading nil)
+(setq bookmark-set-fringe-mark nil)
+
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "IN-PROGRESS(i)" "BLOCKED(b)" "|" "DONE(d)" "CANCELLED(c)")))
+
+(setq org-todo-keyword-faces
+      '(("IN-PROGRESS" . (:foreground "yellow" :weight bold))
+        ("BLOCKED" . (:foreground "red" :weight bold))
+        ("CANCELLED" . (:foreground "gray" :weight bold))))
+
+;; Org-capture templates
+(defun my/org-week-headline ()
+  "Prompt for a week number and return 'Week N'."
+  (format "Week %s" (read-string "Week number: ")))
+
+(setq org-capture-templates
+      '(
+        ;; General TODO
+        ("t" "General TODO" entry
+         (file+headline "~/org/todo.org" "General")
+         "* TODO [#%(read-string \"Priority: \")]  %?"
+         :prepend t)
+        ;; Chores TODO
+        ("c" "Chores TODO" entry
+         (file+headline "~/org/todo.org" "Chores")
+         "* TODO [#%(read-string \"Priority: \")]  %?"
+         :prepend t)
+        ;; Long Running TODO
+        ("l" "Long Running TODO" entry
+         (file+headline "~/org/todo.org" "Long running")
+         "* TODO [#%(read-string \"Priority: \")]  %?"
+         :prepend t)
+        ;; Week TODO
+        ("w" "Week TODO" entry
+         (file+function "~/org/todo.org"
+                        (lambda ()
+                          (goto-char (point-min))
+                          (re-search-forward (concat "^\\* " (regexp-quote (my/org-week-headline))) nil t)))
+         "* TODO [#%(read-string \"Priority: \")]  %?"
+         :prepend t)
+        ))
+
+(defun my/org-format-buffer ()
+ "Reformat the current Org buffer in-place without writing a new file."
+ (interactive)
+ (let ((pos (point)))
+   ;; parse the buffer and re-serialize
+   (let ((parsed (org-element-parse-buffer)))
+     (erase-buffer)
+     (insert (org-element-interpret-data parsed)))
+   (goto-char pos)
+   (message "Org buffer formatted")))
 
 ;; other
 (use-package delight)
@@ -285,22 +317,22 @@
   "vd"  '(pyvenv-deactivate              :which-key "deactivate venv")
   "vw"  '(pyvenv-workon                  :which-key "workon venv")
 
-  ;; Jupyter
-  "jr"  '(jupyter-run-repl               :which-key "run jupyter repl")
-
   ;; Org prefix
   "o" '(:ignore t :which-key "org")
 
   ;; Core org
-  "oa" '(org-agenda         :which-key "agenda")
-  "oc" '(org-capture        :which-key "capture")
-  "ot" '(org-todo           :which-key "todo")
-  "os" '(org-schedule       :which-key "schedule")
-  "od" '(org-deadline       :which-key "deadline")
+  "oa" '(org-agenda          :which-key "agenda")
+  "oc" '(org-capture         :which-key "capture")
+  "ot" '(org-todo            :which-key "todo")
+  "os" '(org-schedule        :which-key "schedule")
+  "od" '(org-deadline        :which-key "deadline")
   "oe" '(org-export-dispatch :which-key "export")
-  "ol" '(org-store-link     :which-key "store link")
-  "oi" '(org-insert-link    :which-key "insert link")
+  "ol" '(org-open-at-point   :which-key "open link")
+  "oi" '(org-insert-link     :which-key "insert link")
 
+  ;; Custom
+  "of" '(my/org-format-buffer :which-key "format org buffer")
+  
   ;; Headings & subtrees
   "oh" '(:ignore t :which-key "headings")
   "ohn" '(org-next-visible-heading     :which-key "next heading")
@@ -316,7 +348,13 @@
   "oki" '(org-clock-in   :which-key "clock in")
   "oko" '(org-clock-out  :which-key "clock out")
 )
- 
+
+;; Org-mode only
+ (general-define-key
+ :states '(normal visual motion)
+ :keymaps 'org-mode-map
+ "SPC of" 'my/org-format-buffer)
+
 ;; Visual-mode only
 (general-define-key
  :states 'visual
@@ -343,7 +381,9 @@
   :keymaps 'override
   "<escape>" 'keyboard-escape-quit)
 
-
+(general-define-key
+ :keymaps 'dired-mode-map
+ "C-=" 'dired-create-empty-file)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
