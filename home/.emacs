@@ -147,13 +147,24 @@
 				text-scale-mode-amount))))
 
 (use-package org
-    :hook (org-mode . (lambda () (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t))))
+  :hook
+  (org-mode . (lambda ()
+                ;; your existing text-scale hook
+                (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t)
+                ;; disable electric indent
+                (electric-indent-local-mode -1)
+                ;; stop Evil from auto-indenting new lines
+                (setq-local evil-auto-indent nil)
+                ;; optional: make org lists flush
+                (setq-local org-list-indent-offset 0
+                            org-list-description-max-indent 0))))
 
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width '(800))
 (setq org-startup-with-latex-preview t)
 (setq org-bookmark-heading nil)
 (setq bookmark-set-fringe-mark nil)
+(setq org-list-indent-offset 0)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "IN-PROGRESS(i)" "BLOCKED(b)" "|" "DONE(d)" "CANCELLED(c)")))
@@ -205,6 +216,15 @@
      (insert (org-element-interpret-data parsed)))
    (goto-char pos)
    (message "Org buffer formatted")))
+
+(defun my/org-insert-img-html-attr ()
+  "Insert #+attr_html: :width 300px and the last copied image path from cliphist."
+  (interactive)
+  (let ((img-path (string-trim
+                   (shell-command-to-string "cliphist list | head -n1 | cliphist decode"))))
+    (insert "#+attr_html: :width 300px\n")
+    (insert (format "[[%s]]" img-path))
+    (end-of-line)))
 
 ;; other
 (use-package delight)
@@ -332,6 +352,7 @@
 
   ;; Custom
   "of" '(my/org-format-buffer :which-key "format org buffer")
+  "ow" '(my/org-insert-img-html-attr :which-key "insert image with HTML attr")
   
   ;; Headings & subtrees
   "oh" '(:ignore t :which-key "headings")
