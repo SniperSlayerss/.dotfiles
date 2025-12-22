@@ -36,7 +36,20 @@ return {
         -- clangd with WebKit fallback style
         vim.lsp.config("clangd", {
             cmd = { "clangd", "--fallback-style=WebKit" },
-            -- any additional clangd-specific settings
+        })
+
+        vim.lsp.config("basedpyright", {
+            settings = {
+                basedpyright = {
+                    analysis = {
+                        typeCheckingMode = "basic",
+
+                        -- reportUnknownVariableType = "none",
+                        -- reportUnknownMemberType = "none",
+                        -- reportMissingTypeStubs = "none",
+                    },
+                },
+            },
         })
 
         -- default setups for other servers
@@ -54,7 +67,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ['<Tab>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
