@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
+
 output_dir=~/org/images
 mkdir -p "$output_dir"
 
-# take note of the most recent file before taking a new one
-last_file=$(ls -t "$output_dir"/*.png 2>/dev/null | head -n1)
+# expand ~ early so we get a real path
+output_dir=$(realpath "$output_dir")
+last_file=$(ls -t "$output_dir"/*.png 2>/dev/null | head -n1 || true)
 
-# take screenshot
-hyprshot -m region -o "$output_dir" >/dev/null 2>&1 &
+# take screenshot synchronously (no &)
+hyprshot -m region -o "$output_dir"
 
-# wait for a new file to appear
+# wait for a new file
 new_file=""
-for i in {1..20}; do  # wait up to 2 seconds (20 * 0.1)
-    file=$(ls -t "$output_dir"/*.png 2>/dev/null | head -n1)
+for i in {1..50}; do  # wait up to 5 seconds
+    file=$(ls -t "$output_dir"/*.png 2>/dev/null | head -n1 || true)
     if [[ "$file" != "$last_file" && -n "$file" ]]; then
         new_file="$file"
         break
@@ -20,21 +22,14 @@ for i in {1..20}; do  # wait up to 2 seconds (20 * 0.1)
 done
 
 if [[ -z "$new_file" ]]; then
-    echo "Error: No new screenshot file found"
+    echo "Error: no new screenshot file found"
     exit 1
 fi
 
-clipboard_file="$new_file"
-if [[ "$clipboard_file" == $HOME* ]]; then
-    clipboard_file="~${clipboard_file#$HOME}"
-fi
+# copy to clipboard for convenience
+echo -n "$new_file" | wl-copy
 
-# copy path to clipboard
-echo -n "$clipboard_file" | wl-copy
-echo -n "$clipboard_file" | xclip -selection clipboard
+# save path to file (use full absolute path)
+echo "$new_file" > "$HOME/.last_screenshot_path"
 
-cliphist wipe
-sleep 0.1
-echo -n "$clipboard_file" | cliphist store
-
-echo "Saved: $clipboard_file"
+echo "Saved: ${new_file/#$HOME/~}"

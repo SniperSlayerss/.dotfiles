@@ -217,14 +217,21 @@
    (goto-char pos)
    (message "Org buffer formatted")))
 
-(defun my/org-insert-img-html-attr ()
-  "Insert #+attr_html: :width 300px and the last copied image path from cliphist."
+(defun my/org-insert-last-screenshot ()
+  "Insert #+attr_html and the last screenshot path saved by screenshot.sh."
   (interactive)
-  (let ((img-path (string-trim
-                   (shell-command-to-string "cliphist list | head -n1 | cliphist decode"))))
-    (insert "#+attr_html: :width 300px\n")
-    (insert (format "[[%s]]" img-path))
-    (end-of-line)))
+  (let* ((path-file (expand-file-name "~/.last_screenshot_path"))
+         (img-path (when (file-exists-p path-file)
+                     (string-trim
+                      (with-temp-buffer
+                        (insert-file-contents path-file)
+                        (buffer-string))))))
+    (if (and img-path (file-exists-p img-path))
+        (progn
+          (insert "#+attr_html: :width 300px\n")
+          (insert (format "[[%s]]" img-path))
+          (end-of-line))
+      (user-error "No saved screenshot path found or file missing"))))
 
 ;; other
 (use-package delight)
@@ -341,18 +348,20 @@
   "o" '(:ignore t :which-key "org")
 
   ;; Core org
-  "oa" '(org-agenda          :which-key "agenda")
-  "oc" '(org-capture         :which-key "capture")
-  "ot" '(org-todo            :which-key "todo")
-  "os" '(org-schedule        :which-key "schedule")
-  "od" '(org-deadline        :which-key "deadline")
-  "oe" '(org-export-dispatch :which-key "export")
-  "ol" '(org-open-at-point   :which-key "open link")
-  "oi" '(org-insert-link     :which-key "insert link")
+  "oa" '(org-agenda               :which-key "agenda")
+  "oc" '(org-capture              :which-key "capture")
+  "ot" '(org-todo                 :which-key "todo")
+  "os" '(org-schedule             :which-key "schedule")
+  "od" '(org-deadline             :which-key "deadline")
+  "oe" '(org-export-dispatch      :which-key "export")
+  "ox" '(org-open-at-point        :which-key "open link")
+  "oi" '(org-insert-link          :which-key "insert link")
+  "ov" '(org-toggle-inline-images :which-key "toggle inline images")
+  "ol" '(org-latex-preview        :which-key "latex preview")
 
   ;; Custom
   "of" '(my/org-format-buffer :which-key "format org buffer")
-  "ow" '(my/org-insert-img-html-attr :which-key "insert image with HTML attr")
+  "ow" '(my/org-insert-last-screenshot :which-key "insert image with HTML attr")
   
   ;; Headings & subtrees
   "oh" '(:ignore t :which-key "headings")
