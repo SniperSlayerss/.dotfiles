@@ -4,6 +4,7 @@ BACKUP_DIR := $(HOME)/.dotfiles.bak
 # format: "source:destination"
 DOTFILES_SHARED := \
     .zshrc:~/.zshrc \
+    .oh-my-zsh/themes/eastwood.zsh-theme:~/.oh-my-zsh/themes/eastwood.zsh-theme \
     .tmux.conf:~/.tmux.conf \
     .emacs:~/.emacs \
     .emacs.custom:~/.emacs.custom \
@@ -18,10 +19,12 @@ DOTFILES_SHARED := \
     .config/waybar:~/.config/waybar \
     .config/sway:~/.config/sway \
 
+.PHONY: install
+install: link
 
 # Default target: Install all dotfiles
-.PHONY: install
-install: clean link
+.PHONY: clean_install
+clean_install: clean link
 
 # Create symlinks
 .PHONY: link
