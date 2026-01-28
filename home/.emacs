@@ -128,12 +128,12 @@
 
 
 ;; org mode
-(setq org-directory "~/org/")
-(setq org-agenda-files '("~/org/"))
+(setq org-directory "~/org-files/")
+(setq org-agenda-files '("~/org-files/"))
 
 (setq org-preview-latex-image-directory "~/.emacs.d/ltximg/")
 (setq org-latex-create-formula-image-program 'dvisvgm)
-(setq org-agenda-files (directory-files-recursively "~/org" "\\.org$"))
+(setq org-agenda-files (directory-files-recursively "~/org-files" "\\.org$"))
 
 (with-eval-after-load 'org
   (setq org-format-latex-options
@@ -362,7 +362,7 @@
   ;; Custom
   "of" '(my/org-format-buffer :which-key "format org buffer")
   "ow" '(my/org-insert-last-screenshot :which-key "insert image with HTML attr")
-  
+
   ;; Headings & subtrees
   "oh" '(:ignore t :which-key "headings")
   "ohn" '(org-next-visible-heading     :which-key "next heading")
