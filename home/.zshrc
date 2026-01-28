@@ -9,6 +9,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/nvim-linux64/bin:$PATH"
 
+export ANKI_BASE="$HOME/org-files/anki-data"
+
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init - zsh)"
