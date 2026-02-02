@@ -167,7 +167,7 @@
 (setq org-list-indent-offset 0)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "IN-PROGRESS(i)" "BLOCKED(b)" "|" "DONE(d)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "LEARNING(l)" "PRACTICE(p)" "|" "DONE(d)" "CANCELLED(c)")))
 
 (setq org-todo-keyword-faces
       '(("IN-PROGRESS" . (:foreground "yellow" :weight bold))

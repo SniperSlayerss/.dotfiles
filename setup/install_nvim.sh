@@ -15,7 +15,7 @@ trap cleanup EXIT INT TERM
 cd "$BUILD_DIR"
 
 echo "INFO: Cloning nvim"
-git clone https://github.com/neovim/neovim.git --depth 1
+git clone https://github.com/neovim/neovim.git --depth 1 --branch stable
 
 cd neovim
 
