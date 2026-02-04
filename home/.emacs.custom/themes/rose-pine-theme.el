@@ -203,6 +203,13 @@
    `(orderless-match-face-1 ((t (:foreground ,gold :weight bold))))
    `(orderless-match-face-2 ((t (:foreground ,foam :weight bold))))
    `(orderless-match-face-3 ((t (:foreground ,iris :weight bold))))
+
+   `(org-level-1 ((t (:foreground ,gold :weight bold))))
+   `(org-level-2 ((t (:foreground ,love :weight bold))))
+   `(org-level-3 ((t (:foreground ,foam :weight bold))))
+   `(org-level-4 ((t (:foreground ,pine :weight bold))))
+   `(org-level-5 ((t (:foreground ,iris :weight bold))))
+   `(org-level-6 ((t (:foreground ,text :weight bold))))
    ))
 
 ;; Add to custom-theme-load-path

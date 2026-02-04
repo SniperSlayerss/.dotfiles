@@ -136,8 +136,11 @@
 (setq org-agenda-files (directory-files-recursively "~/org-files" "\\.org$"))
 
 (with-eval-after-load 'org
+  (let ((entry (assoc-string "*" org-emphasis-alist)))
+    (when entry
+      (setcdr entry '((:foreground "#ea9a97" :weight bold)))))
   (setq org-format-latex-options
-        (plist-put (copy-sequence org-format-latex-options) :scale 0.5)))
+        (plist-put (copy-sequence org-format-latex-options) :scale 1.5)))
 
 (defun my/resize-org-latex-overlays ()
   (cl-loop for o in (car (overlay-lists))
@@ -228,7 +231,7 @@
                         (buffer-string))))))
     (if (and img-path (file-exists-p img-path))
         (progn
-          (insert "#+attr_html: :width 300px\n")
+          (insert "#+attr_html: :width 500px\n")
           (insert (format "[[%s]]" img-path))
           (end-of-line))
       (user-error "No saved screenshot path found or file missing"))))
@@ -406,10 +409,10 @@
   "C-c" 'evil-normal-state)
 
 ;; Everywhere but insert mode
-(general-define-key
-  :states '(normal visual motion operator emacs)
-  :keymaps 'override
-  "<escape>" 'keyboard-escape-quit)
+;; (general-define-key
+;;  :states '(normal visual motion operator emacs)
+;;  :keymaps 'override
+;;  "<escape>" 'keyboard-escape-quit)
 
 (general-define-key
  :keymaps 'dired-mode-map
