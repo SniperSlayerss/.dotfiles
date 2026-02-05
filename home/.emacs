@@ -140,7 +140,7 @@
     (when entry
       (setcdr entry '((:foreground "#ea9a97" :weight bold)))))
   (setq org-format-latex-options
-        (plist-put (copy-sequence org-format-latex-options) :scale 1.5)))
+        (plist-put (copy-sequence org-format-latex-options) :scale 0.5)))
 
 (defun my/resize-org-latex-overlays ()
   (cl-loop for o in (car (overlay-lists))

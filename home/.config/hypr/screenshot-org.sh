@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-output_dir=~/org/images
+output_dir=~/org-files/images
 mkdir -p "$output_dir"
 
 # expand ~ early so we get a real path
