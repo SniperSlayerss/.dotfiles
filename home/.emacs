@@ -140,20 +140,54 @@
     (when entry
       (setcdr entry '((:foreground "#ea9a97" :weight bold)))))
   (setq org-format-latex-options
-        (plist-put (copy-sequence org-format-latex-options) :scale 0.5)))
+        (plist-put (copy-sequence org-format-latex-options) :scale 1)))
+
+;;(defun my/resize-org-latex-overlays ()
+;;  (cl-loop for o in (car (overlay-lists))
+;;     if (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay)
+;;     do (plist-put (cdr (overlay-get o 'display))
+;;             :scale (expt text-scale-mode-step
+;;                    text-scale-mode-amount))))
 
 (defun my/resize-org-latex-overlays ()
   (cl-loop for o in (car (overlay-lists))
-     if (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay)
-     do (plist-put (cdr (overlay-get o 'display))
-		   :scale (expt text-scale-mode-step
-				text-scale-mode-amount))))
+           when (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay)
+           do
+           (let* ((disp (overlay-get o 'display))
+                  ;; extract image plist safely
+                  (img (cond
+                        ((and (consp disp) (eq (car disp) 'image))
+                         (cdr disp))
+                        ((and (consp disp) (eq (car disp) 'display)
+                              (consp (cadr disp)) (eq (caadr disp) 'image))
+                         (cdadr disp))
+                        ((and (consp disp) (eq (car disp) 'image))
+                         (cdr disp))
+                        (t nil))))
+             (when img
+               (let ((newimg (copy-sequence img)))
+                 ;; remove any existing scale
+                 (setq newimg (plist-put newimg :scale nil))
+                 ;; apply our scale
+                 (setq newimg
+                       (plist-put newimg :scale
+                                  (expt text-scale-mode-step
+                                        text-scale-mode-amount)))
+                 ;; restore overlay display
+                 (overlay-put o 'display (cons 'image newimg)))))))
+
+(defun my/org-fix-initial-latex-scale (&rest _)
+  (my/resize-org-latex-overlays))
+
 
 (use-package org
   :hook
   (org-mode . (lambda ()
                 ;; your existing text-scale hook
                 (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t)
+
+		(advice-add 'org-latex-preview :after #'my/org-fix-initial-latex-scale)
+
                 ;; disable electric indent
                 (electric-indent-local-mode -1)
                 ;; stop Evil from auto-indenting new lines
