@@ -1,11 +1,13 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  priority = 1000,
+  lazy = false,
   build = ":TSUpdate",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   config = function()
-    require("nvim-treesitter.configs").setup({
+    require("nvim-treesitter").setup({
       ensure_installed = {
         "vimdoc", "javascript", "typescript", "c", "lua", "rust",
         "jsdoc", "bash",
@@ -25,15 +27,7 @@ return {
       },
     })
 
-    local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    treesitter_parser_config.templ = {
-      install_info = {
-        url = "https://github.com/vrischmann/tree-sitter-templ.git",
-        files = { "src/parser.c", "src/scanner.c" },
-        branch = "master",
-      },
-    }
-
+    vim.filetype.add({ extension = { templ = "templ" } })
     vim.treesitter.language.register("templ", "templ")
 
     vim.keymap.set({ "n", "v" }, "<C-Down>", function()
@@ -79,7 +73,6 @@ return {
       vim.opt.lazyredraw = false
       vim.cmd("redraw")
     end, { desc = "Jump to previous function end or class end via Treesitter" })
-
 
     vim.keymap.set("n", "]c", function()
       require("nvim-treesitter.textobjects.move").goto_next_start({
