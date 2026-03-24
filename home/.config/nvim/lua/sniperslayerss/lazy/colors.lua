@@ -7,5 +7,6 @@ local rose_pine = require("rose_pine")
 local rose_pine_dawn = require("rose_pine_dawn")
 local alabaster = require("alabaster")
 local gruber_darker = require("gruber_darker_theme")
+local solarized = require("solarized_theme")
 
 return rose_pine
