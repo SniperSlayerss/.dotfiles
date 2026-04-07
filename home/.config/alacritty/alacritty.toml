@@ -1,13 +1,14 @@
 general.import = ["~/.config/alacritty/rose_pine_moon.toml"]
 
 [window]
-  opacity = 0.95
+opacity = 0.95
 
 [font]
-  normal = { family = "IosevkaNerdFontMono", style = "Regular" }
-  bold = { family = "IosevkaNerdFontMono", style = "Bold" }
-  italic = { family = "IosevkaNerdFontMono", style = "Italic" }
-  size = 16
+normal = { family = "IosevkaNerdFontMono", style = "Regular" }
+bold = { family = "IosevkaNerdFontMono", style = "Bold" }
+italic = { family = "IosevkaNerdFontMono", style = "Italic" }
+size = 16
+
 
 [env]
-    TERM = "xterm-256color"
+TERM = "xterm-256color"
