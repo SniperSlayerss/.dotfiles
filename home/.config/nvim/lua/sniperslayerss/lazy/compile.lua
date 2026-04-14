@@ -1,29 +1,33 @@
+-- TODO: change regexp for project? either git or presence of make file??
 return {
-  "ej-shafran/compile-mode.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  config = function()
-    -- vim.keymap.set("n", "<leader>cc", "<cmd>below Compile<CR>")
-    vim.g.compile_mode = {
-      default_command = ""
-    }
+    "ej-shafran/compile-mode.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    config = function()
+        -- vim.keymap.set("n", "<leader>cc", "<cmd>below Compile<CR>")
+        vim.g.compile_mode = {
+            default_command = "",
+            focus_compilation_buffer = true,
+            use_circular_error_navigation = true,
+            error_threshold = require("compile-mode").level.ERROR,
+        }
 
-    vim.keymap.set("n", "<leader>cc", function()
-      local cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
+        vim.keymap.set("n", "<leader>cc", function()
+            local cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
 
-      -- Remove 'oil://' prefix if present
-      if cwd:match("^oil://") then
-        cwd = cwd:gsub("^oil://", "")
-      end
+            -- Remove 'oil://' prefix if present
+            if cwd:match("^oil://") then
+                cwd = cwd:gsub("^oil://", "")
+            end
 
-      -- Temporarily change directory, run Compile, then restore the original directory
-      vim.cmd("lcd " .. vim.fn.fnameescape(cwd)) -- Change directory locally
-      vim.cmd("belowright Compile")          -- Run Compile in the correct directory
-    end, {})
+            -- Temporarily change directory, run Compile, then restore the original directory
+            vim.cmd("lcd " .. vim.fn.fnameescape(cwd)) -- Change directory locally
+            vim.cmd("belowright Compile")              -- Run Compile in the correct directory
+        end, {})
 
-    vim.keymap.set("n", "<leader>pc", "<cmd>below Compile<CR>")
-  end
+        vim.keymap.set("n", "<leader>pc", "<cmd>below Compile<CR>")
+    end
 }
 
 
