@@ -2,6 +2,10 @@ require("sniperslayerss.remap")
 require("sniperslayerss.set")
 require("sniperslayerss.lazy_init")
 
+if not vim.lsp.buf_get_clients then
+    vim.lsp.buf_get_clients = vim.lsp.get_clients
+end
+
 local augroup = vim.api.nvim_create_augroup
 local SniperSlayerssGroup = augroup('SniperSlayerss', {})
 
@@ -29,7 +33,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = SniperSlayerssGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
@@ -59,5 +63,5 @@ vim.g.netrw_winsize = 25
 vim.api.nvim_set_hl(0, "WinNormal", { link = "Normal" })
 
 vim.diagnostic.config({
-  virtual_text = true,
+    virtual_text = true,
 })
