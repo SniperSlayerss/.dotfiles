@@ -83,7 +83,24 @@ return {
             local opts = {
                 cwd = cwd,
                 hidden = true,
-                no_ignore = false,
+                file_ignore_patterns = { ".git/" },
+            }
+            builtin.find_files(opts)
+        end, {})
+
+        -- find files local to current file (or oil dir) ignoring .gitignore
+        vim.keymap.set("n", "<leader>fi", function()
+            local cwd = vim.fn.expand("%:p:h") -- Get the directory of the current file
+
+            -- Remove 'oil://' prefix if present
+            if cwd:match("^oil://") then
+                cwd = cwd:gsub("^oil://", "")
+            end
+
+            local opts = {
+                cwd = cwd,
+                hidden = true,
+                no_ignore = true,
                 file_ignore_patterns = { ".git/" },
             }
             builtin.find_files(opts)
@@ -93,7 +110,15 @@ return {
         vim.keymap.set("n", "<leader>pf", function()
             builtin.find_files({
                 hidden = true,
-                no_ignore = false,
+                file_ignore_patterns = { ".git/" },
+            })
+        end, {})
+
+        -- find files in project root ignoring .gitignore
+        vim.keymap.set("n", "<leader>pi", function()
+            builtin.find_files({
+                hidden = true,
+                no_ignore = true,
                 file_ignore_patterns = { ".git/" },
             })
         end, {})

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./install_deps.sh ninja-build gettext cmake curl build-essential
+./install_deps.sh ninja-build gettext cmake curl build-essential ripgrep
 
 set -e
 
