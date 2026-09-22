@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (add-to-list 'custom-theme-load-path "~/.emacs.custom/themes")
 (load-theme 'rose-pine t)
 

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (load-file "~/.emacs.custom/require.el")
 (load-file "~/.emacs.custom/style.el")
 (load-file "~/.emacs.custom/utils.el")

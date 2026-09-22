@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun alt/backward-kill-word ()
   "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
   (interactive)

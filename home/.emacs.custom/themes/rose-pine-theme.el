@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (unless (>= emacs-major-version 24)
   (error "rose-pine requires Emacs 24 or later."))
 
