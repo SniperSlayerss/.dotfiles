@@ -131,8 +131,9 @@ return {
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
         end)
+        -- TODO do similar to search, a project wide and cwd kind
         vim.keymap.set("n", "<leader>ps", function()
-            builtin.grep_string({ search = vim.fn.input("Grep > ") })
+            builtin.grep_string({ search = "" })
         end)
         vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
