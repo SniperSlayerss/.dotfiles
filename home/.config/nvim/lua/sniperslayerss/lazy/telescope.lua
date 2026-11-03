@@ -53,6 +53,10 @@ return {
                     sort_lastused = true,
                     ignore_current_buffer = true,
                 },
+                lsp_references = {
+                    previewer = true,
+                    include_declaration = false, -- optional
+                },
             },
             extensions = {
                 projects = {},
@@ -162,5 +166,7 @@ return {
                 end,
             })
         end, { desc = "Find and Search Projects" })
+
+        vim.keymap.set("n", "grr", builtin.lsp_references, { desc = "LSP references" })
     end
 }
