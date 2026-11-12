@@ -33,7 +33,7 @@ link:
 	@$(foreach dotfile, $(DOTFILES_SHARED), \
 	    src=$(word 1,$(subst :, ,$(dotfile))); \
 	    dest=$(word 2,$(subst :, ,$(dotfile))); \
-	    ln -sf $(DOTFILES_SHARED_DIR)/$$src $$(eval echo $$dest); \
+	    ln -sfT $(DOTFILES_SHARED_DIR)/$$src $$(eval echo $$dest); \
 	    echo "Linked $(DOTFILES_SHARED_DIR)/$$src -> $$dest"; \
 	)
 
